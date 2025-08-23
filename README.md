@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gabriel Colmenares - Página Web Oficial
 
-## Getting Started
+Página web para Gabriel Colmenares (@uncolmenares) - Comediante & Director Creativo
 
-First, run the development server:
+## 🎭 Cliente
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Nombre:** Gabriel Colmenares
+- **Instagram:** [@uncolmenares](https://instagram.com/uncolmenares)
+- **Ubicación:** Santiago, Chile
+- **Servicios:** Stand Up Comedy, Presentación Eventos, Dirección Creativa
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Stack Técnico
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS v3
+- Framer Motion
+- Lucide React
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🎯 Objetivos Principales
 
-## Learn More
+1. **Vender 180 entradas** para show diciembre 2024
+2. **Hub central** para todos sus servicios
+3. **Más bookings corporativos**
+4. **Posicionamiento dirección creativa**
 
-To learn more about Next.js, take a look at the following resources:
+## 📋 Funcionalidades
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### ✅ Implementadas
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Landing page personalizada
+- Sección Shows (placeholder)
+- Portfolio de casos de éxito
+- Contacto directo WhatsApp/Instagram
+- SEO básico optimizado
 
-## Deploy on Vercel
+### 🔄 En Desarrollo
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Integración Passline API (entradas)
+- Calendar booking system
+- Instagram/Spotify feeds automáticos
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎨 Paleta de Colores
+
+- **Primario:** #2C3E50 (Azul marino profesional)
+- **Secundario:** #ECF0F1 (Gris claro elegante)
+- **Acento:** #F39C12 (Naranja cálido energético)
+
+## 🚀 Deploy
+
+- **Producción:** [URL por definir]
+- **Staging:** [URL por definir]
+
+---
+
+**Desarrollado por:** [Miguel Gil Urbina](https://github.com/miguelgilurbina) | Tu Web en 7 Días
