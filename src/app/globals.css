@@ -3,13 +3,14 @@
 @tailwind utilities;
 
 :root {
-  /* Paleta TuWebEn7Días */
-  --primary: #62868D;        /* Azul Enebro - Confianza */
-  --secondary: #D78B7D;      /* Terracota Cálida - Calidez */
-  --accent: #E32283;         /* Magenta CTA - Urgencia */
-  --neutral-light: #F9F3E3;  /* Lino Crema - Fondo */
-  --neutral-dark: #2D3748;   /* Texto principal */
-  --neutral-medium: #718096; /* Texto secundario */
+  /* Paleta "Equilibrio Profesional" - Ideal para Gabriel */
+  --color-primary: #2C3E50;      /* Azul marino profesional */
+  --color-secondary: #ECF0F1;    /* Gris claro elegante */
+  --color-accent: #F39C12;       /* Naranja cálido energético */
+  --color-text: #2C3E50;
+  --color-text-light: #7F8C8D;
+  --color-background: #FFFFFF;
+  --color-surface: #F8F9FA;
 }
 
 @layer base {

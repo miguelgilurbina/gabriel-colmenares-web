@@ -1,55 +1,60 @@
+// src/app/layout.tsx - Actualizado para Gabriel Colmenares
+
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
-// Import the template data
+
+// Import Gabriel's template data
 import templateData from "@/data/template.json";
 import { SiteData } from "@/lib/types";
 
+// Fonts actualizados para Gabriel (Montserrat como en el brief)
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 });
 
-const poppins = Poppins({
-  weight: ["400", "500", "600", "700"],
+const montserrat = Montserrat({
+  weight: ["400", "500", "600", "700", "800"],
   subsets: ["latin"],
-  variable: "--font-poppins",
+  variable: "--font-montserrat",
 });
 
+// Metadata específico para Gabriel
 export const metadata: Metadata = {
-  title: "Tu Web En 7 Días - Páginas Web Profesionales",
+  title: "Gabriel Colmenares - Comediante & Director Creativo",
   description:
-    "Obtén tu página web profesional en 7 días hábiles. Diseño responsive, SEO optimizado, formulario de contacto incluido. Solo $250.000 CLP.",
+    "Comediante venezolano en Santiago con 5 años de experiencia. Stand Up Comedy, Dirección Creativa, Presentación de Eventos. Todo es conmigo, todo es directo.",
   keywords:
-    "páginas web, diseño web, sitios web profesionales, landing pages, Chile, pymes, profesionales independientes",
-  authors: [{ name: "Tu Web En 7 Días" }],
+    "Gabriel Colmenares, comediante Santiago, stand up comedy Chile, director creativo, presentador eventos, @uncolmenares, comedia venezolana",
+  authors: [{ name: "Gabriel Colmenares" }],
   openGraph: {
-    title: "Tu Web En 7 Días - Páginas Web Profesionales",
+    title: "Gabriel Colmenares - Comediante & Director Creativo",
     description:
-      "Páginas web profesionales entregadas en 7 días hábiles. $250.000 precio fijo, sin sorpresas.",
-    url: "https://tuweben7dias.com",
-    siteName: "Tu Web En 7 Días",
+      "5 años creando conexiones genuinas desde Santiago. Stand Up Comedy, Dirección Creativa y más. Todo es conmigo, todo es directo.",
+    url: "https://gabrielcolmenares.com",
+    siteName: "Gabriel Colmenares",
     locale: "es_CL",
     type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: "/images/gabriel-og.jpg",
         width: 1200,
         height: 630,
-        alt: "Tu Web En 7 Días - Páginas Web Profesionales",
+        alt: "Gabriel Colmenares - Comediante & Director Creativo",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tu Web En 7 Días - Páginas Web Profesionales",
+    title: "Gabriel Colmenares - Comediante & Director Creativo",
     description:
-      "Páginas web profesionales entregadas en 7 días hábiles. $250.000 precio fijo.",
-    images: ["/og-image.png"],
+      "Comediante venezolano en Santiago. Stand Up Comedy, Dirección Creativa, Presentación de Eventos.",
+    images: ["/images/gabriel-og.jpg"],
   },
-  // Favicon y meta tags
+  // Favicon
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -57,13 +62,14 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-touch-icon.png",
   },
-  themeColor: "#62868D",
+  // Paleta Equilibrio Profesional
+  themeColor: "#2C3E50",
   other: {
-    "msapplication-TileColor": "#62868D",
+    "msapplication-TileColor": "#2C3E50",
   },
 };
 
-// Type assertion for the imported JSON
+// Type assertion para los datos importados
 const siteData = templateData as SiteData;
 
 export default function RootLayout({
@@ -74,16 +80,34 @@ export default function RootLayout({
   return (
     <html lang="es" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${poppins.variable} font-sans antialiased min-h-screen flex flex-col`}
+        className={`${inter.variable} ${montserrat.variable} font-sans antialiased min-h-screen flex flex-col`}
       >
-        {/* Header */}
-        <Header data={{ ...siteData.site, ...siteData.contact }} />
+        {/* Header con datos de Gabriel */}
+        <Header
+          data={{
+            name: siteData.site.name,
+            business: siteData.site.business,
+            whatsapp: siteData.contact.whatsapp,
+            instagram: siteData.contact.instagram,
+          }}
+        />
 
         {/* Main Content */}
         <main className="flex-1">{children}</main>
 
-        {/* Footer */}
-        <Footer data={{ ...siteData.site, ...siteData.contact }} />
+        {/* Footer con datos completos de Gabriel */}
+        <Footer
+          data={{
+            name: siteData.site.name,
+            business: siteData.site.business,
+            location: siteData.site.location,
+            whatsapp: siteData.contact.whatsapp,
+            email: siteData.contact.email,
+            instagram: siteData.contact.instagram,
+            youtube: siteData.contact.youtube,
+            spotify: siteData.contact.spotify,
+          }}
+        />
       </body>
     </html>
   );

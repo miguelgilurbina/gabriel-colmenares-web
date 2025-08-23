@@ -1,84 +1,86 @@
+// src/lib/types.ts - Actualizado para Gabriel Colmenares
+
 export interface SiteData {
+  // Info básica del cliente/sitio
   site: {
     name: string;
+    business: string;
     tagline: string;
-    description: string;
+    location: string;
   };
-  contact: {
-    email: string;
-    phone: string;
-    whatsapp: string;
-    social: {
-      instagram?: string;
-      linkedin?: string;
-      facebook?: string;
-    };
-  };
+
+  // Hero section adaptado para Gabriel
   hero: {
     headline: string;
     subtitle: string;
-    cta_primary: string;
-    cta_secondary: string;
-    features: string[];
+    description: string;
+    primaryCTA: {
+      text: string;
+      action: string;
+    };
+    secondaryCTA: {
+      text: string;
+      action: string;
+    };
+    backgroundImage?: string;
   };
+
+  // About section para su historia personal
   about: {
     title: string;
     subtitle: string;
     description: string;
-    benefits: {
-      title: string;
-      description: string;
-    }[];
+    achievements: string[];
+    image?: string;
   };
+
+  // Services adaptados para sus servicios creativos
   services: {
-  title: string;
-  subtitle: string;
-  main_service: {
+    id: string;
     title: string;
     description: string;
-    price: string;
-    features: string[];
-  };
-  maintenance_plans: {
-    name: string;
-    price: string;
-    period: string;
-    description: string;
-    popular: boolean;
-    features: string[];
+    icon: string;
+    featured: boolean;    // Para destacar Stand Up Comedy
+    premium: boolean;     // Para servicios premium
   }[];
-};
-  process: {
-  title: string;
-  subtitle: string;  // ✨ NUEVO
-  steps: {
-    number: string;
+
+  // Portfolio de casos de éxito
+  portfolio: {
     title: string;
     description: string;
-    timeline: string;      // ✨ NUEVO
-    deliverable: string;   // ✨ NUEVO
+    result: string;
+    image?: string;
   }[];
-};
-  pricing: {
+
+  // Contact info completo
+  contact: {
     title: string;
     subtitle: string;
-    price: string;
-    currency: string;
-    features: string[];
-    payment: {
-      down_payment: string;
-      final_payment: string;
+    whatsapp: string;
+    email: string;
+    instagram: string;
+    youtube?: string;
+    spotify?: string;
+  };
+
+  // Próximos shows (placeholder para Passline)
+  shows?: {
+    title: string;
+    subtitle: string;
+    featured_show?: {
+      title: string;
+      description: string;
+      target_tickets: number;
+      cta_text: string;
+      cta_link: string;
     };
   };
-  faq: {
-    question: string;
-    answer: string;
-  }[];
 }
 
-// Interfaces específicas para cada componente
+// Interfaces específicas para cada componente actualizado
 export interface HeroProps {
   data: SiteData['hero'];
+  site: SiteData['site'];
   className?: string;
 }
 
@@ -92,13 +94,13 @@ export interface ServicesProps {
   className?: string;
 }
 
-export interface ProcessProps {
-  data: SiteData['process'];
+export interface PortfolioProps {
+  data: SiteData['portfolio'];
   className?: string;
 }
 
-export interface PricingProps {
-  data: SiteData['pricing'];
+export interface ShowsProps {
+  data: SiteData['shows'];
   className?: string;
 }
 
@@ -107,13 +109,36 @@ export interface ContactProps {
   className?: string;
 }
 
+// Mantenemos FAQ si Gabriel lo necesita después
 export interface FAQProps {
-  data: SiteData['faq'];
+  data: {
+    question: string;
+    answer: string;
+  }[];
   className?: string;
 }
 
-// Interface genérica si necesitas algo flexible
+// Interface genérica
 export interface BaseComponentProps<T = unknown> {
   data: T;
   className?: string;
+}
+
+// Types para el header y footer actualizados
+export interface HeaderData {
+  name: string;
+  business: string;
+  whatsapp: string;
+  instagram: string;
+}
+
+export interface FooterData {
+  name: string;
+  business: string;
+  location: string;
+  whatsapp: string;
+  email: string;
+  instagram: string;
+  youtube?: string;
+  spotify?: string;
 }

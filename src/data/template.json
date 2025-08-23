@@ -1,154 +1,117 @@
 {
   "site": {
-    "name": "Tu Web En 7 Días",
-    "tagline": "Páginas Web Profesionales en 7 Días",
-    "description": "Transforma tu presencia digital con páginas web profesionales entregadas en tiempo récord"
-  },
-  "contact": {
-    "email": "miguel@tuweben7dias.com",
-    "phone": "+56 9 7722 1088",
-    "whatsapp": "+56977221088",
-    "social": {
-      "instagram": "https://instagram.com/tuweben7dias",
-      "linkedin": "https://linkedin.com/company/tuweben7dias"
-    }
+    "name": "Gabriel Colmenares",
+    "business": "@uncolmenares",
+    "tagline": "Comediante & Director Creativo",
+    "location": "Santiago, Chile"
   },
   "hero": {
-  "headline": "Tu Página Web Profesional Lista en 7 Días",
-  "subtitle": "Deja de perder clientes por no tener presencia web. Landing page completa, optimizada y lista para generar leads desde el día 1.",
-  "cta_primary": "Quiero Mi Web YA",
-  "cta_secondary": "Ver Casos de Éxito",
-  "features": [
-    "Entrega garantizada en 7 días habiles",
-    "100% responsive y optimizado",
-    "SEO incluido para aparecer en Google",
-    "Formulario que captura leads reales"
-  ]
-},
+    "headline": "Gabriel Colmenares",
+    "subtitle": "Comediante & Director Creativo",
+    "description": "5 años creando conexiones genuinas desde Santiago. Todo es conmigo, todo es directo.",
+    "primaryCTA": {
+      "text": "Ver Próximos Shows",
+      "action": "#shows"
+    },
+    "secondaryCTA": {
+      "text": "Hablemos de tu proyecto",
+      "action": "#contact"
+    },
+    "backgroundImage": "/images/gabriel-hero.jpg"
+  },
   "about": {
-  "title": "¿Por Qué TuWebEn7Días?",
-  "subtitle": "La alternativa inteligente entre agencias caras y freelancers impredecibles",
-  "description": "No somos una agencia corporativa que cobra $2M ni un freelancer que desaparece. Somos especialistas en landing pages con un sistema probado que entrega calidad profesional en tiempo récord.",
-  "benefits": [
+    "title": "Mi Historia",
+    "subtitle": "De putero adaptado a 100 personas - La transformación que define mi profesionalismo",
+    "description": "Comediante venezolano en Santiago con 5 años de experiencia. De asistente de producción a crear mi propia productora 'Alien Caribeño'. He teloneado a Luis Slimming, Esteban Duch y Doctor Escalona. Mi misión: conexión genuina sin intermediarios.",
+    "achievements": [
+      "Teloneado a Luis Slimming, Esteban Duch, Doctor Escalona",
+      "Sold out en Mix Chatarritas (4 presentaciones)",
+      "Fundador productora Alien Caribeño",
+      "Cliente recurrente clínica odontológica (3 años)",
+      "Presentación WeWork Las Condes"
+    ],
+    "image": "/images/gabriel-about.jpg"
+  },
+  "services": [
     {
-      "title": "Stack Tecnológico Moderno",
-      "description": "Next.js + TypeScript + Tailwind CSS - Tu web carga rápido y se ve perfecta en cualquier dispositivo"
+      "id": "standup",
+      "title": "Stand Up Comedy",
+      "description": "Shows de comedia en vivo, desde venues íntimos hasta eventos corporativos",
+      "icon": "Mic",
+      "featured": true,
+      "premium": false
     },
     {
-      "title": "Precio Fijo Sin Sorpresas",
-      "description": "$250.000 CLP incluye todo: diseño, desarrollo, optimización y hosting por 1 año"
+      "id": "hosting",
+      "title": "Presentación de Eventos",
+      "description": "Animación y conducción de eventos corporativos y de entretenimiento",
+      "icon": "Users",
+      "featured": false,
+      "premium": true
     },
     {
-      "title": "Especialización en Conversión",
-      "description": "No solo hacemos webs bonitas, las optimizamos para que generen leads y ventas reales"
+      "id": "creative",
+      "title": "Dirección Creativa",
+      "description": "Dirección de videoclips musicales y contenido visual, desde concepto hasta ejecución",
+      "icon": "Video",
+      "featured": false,
+      "premium": true
+    },
+    {
+      "id": "podcast",
+      "title": "Podcast",
+      "description": "Contenido de audio semanal, entrevistas y entretenimiento",
+      "icon": "Headphones",
+      "featured": false,
+      "premium": false
+    },
+    {
+      "id": "writing",
+      "title": "Guionista Creativo",
+      "description": "Escritura de guiones para comedia, contenido y proyectos audiovisuales",
+      "icon": "PenTool",
+      "featured": false,
+      "premium": true
     }
-  ]
-},
-  "services": {
-  "title": "Nuestros Servicios",
-  "subtitle": "Landing page profesional + mantenimiento opcional para hacer crecer tu negocio",
-  "main_service": {
-    "title": "Landing Page Profesional",
-    "description": "Tu página web completa y optimizada en 7 días hábiles",
-    "price": "$250.000",
-    "features": [
-      "Diseño 100% responsive",
-      "SEO básico optimizado", 
-      "Formulario de contacto funcional",
-      "Carga ultrarrápida (Next.js)",
-      "Google Analytics configurado",
-      "Entrega con código fuente"
-    ]
-  },
-  "maintenance_plans": [
+  ],
+  "portfolio": [
     {
-      "name": "Plan Básico",
-      "price": "$25.000",
-      "period": "/mes",
-      "description": "Perfecto para mantener tu web segura y actualizada",
-      "popular": false,
-      "features": [
-        "Hosting en Vercel incluido",
-        "Actualizaciones de seguridad automáticas",
-        "Backup semanal automático", 
-        "2 cambios menores al mes",
-        "Soporte técnico por WhatsApp",
-        "Informe mensual de visitas básico"
-      ]
+      "title": "Show +30k20 - Sold Out",
+      "description": "Mi unipersonal más exitoso, 100 personas sold out",
+      "result": "100% ocupación, reposiciones solicitadas",
+      "image": "/images/show-30k20.jpg"
     },
     {
-      "name": "Plan Premium", 
-      "price": "$45.000",
-      "period": "/mes",
-      "description": "Para negocios que quieren crecer y optimizar constantemente",
-      "popular": true,
-      "features": [
-        "Todo lo del Plan Básico",
-        "5 cambios menores al mes",
-        "1 cambio mayor cada 3 meses",
-        "Informe analítico detallado mensual",
-        "Optimización SEO trimestral",
-        "Soporte prioritario (respuesta <2h)",
-        "Backup diario automático",
-        "Consultoría web mensual (30 min)"
-      ]
+      "title": "Mix Chatarritas - 4 Sold Outs",
+      "description": "Show de crowdwork semanal consolidado",
+      "result": "4 funciones sold out consecutivas",
+      "image": "/images/mix-chatarritas.jpg"
+    },
+    {
+      "title": "Cliente Corporativo 3 años",
+      "description": "Colaboración clínica odontológica recurrente",
+      "result": "Fidelización a largo plazo, contenido especializado",
+      "image": "/images/corporate-work.jpg"
     }
-  ]
-},
- "process": {
-  "title": "Hoja de ruta de Desarrollo",
-  "subtitle": "Proceso transparente con reuniones estratégicas incluidas",
-  "steps": [
-    {
-      "number": "01",
-      "title": "Reunión Inicial (30 min)",
-      "description": "Te explico todo el proceso, tiempos y resolvemos dudas. Sin compromiso.",
-      "timeline": "Día 0",
-      "deliverable": "Propuesta clara y timeline definido"
-    },
-    {
-      "number": "02", 
-      "title": "Pago 50% + Assessment de Marca",
-      "description": "Confirmas el proyecto y coordinamos reunión para bajar información de tu negocio, marca y objetivos.",
-      "timeline": "Día 1-2",
-      "deliverable": "Manual de marca fundacional + estrategia web"
-    },
-    {
-      "number": "03",
-      "title": "Presentación de Avance",
-      "description": "Te muestro diseño, estructura y contenido para validar dirección antes de finalizar.",
-      "timeline": "Día 3-4",
-      "deliverable": "Demo funcional + sesión de feedback"
-    },
-    {
-      "number": "04",
-      "title": "Entrega Final + Go Live",
-      "description": "Tu web terminada, desplegada y lista. Pago final y entrega de accesos completos.",
-      "timeline": "Día 6-7",
-      "deliverable": "Web online + código fuente + documentación"
+  ],
+  "contact": {
+    "title": "¿Hablamos?",
+    "subtitle": "Todo pasa por mí directamente.",
+    "whatsapp": "+56932323094",
+    "email": "gabrielcrodriguez0@gmail.com",
+    "instagram": "@uncolmenares",
+    "youtube": "https://www.youtube.com/@uncolmenares",
+    "spotify": "https://open.spotify.com/show/3Zax7N0vOGKMCp6en30ERf"
+  },
+  "shows": {
+    "title": "Próximos Shows",
+    "subtitle": "Conectando en vivo, una risa a la vez",
+    "featured_show": {
+      "title": "🎭 SHOW GRANDE DICIEMBRE 2024",
+      "description": "Mi evento más ambicioso del año. Una noche especial de comedia que no te puedes perder.",
+      "target_tickets": 180,
+      "cta_text": "Comprar Entradas",
+      "cta_link": "#tickets"
     }
-  ]
-},
-  "faq": [
-  {
-    "question": "¿Por qué elegir TuWebEn7Días en lugar de Wix o WordPress?",
-    "answer": "Wix y WordPress son herramientas genéricas. Nosotros creamos páginas optimizadas específicamente para tu industria, con Next.js (la tecnología que usan Netflix y TikTok) que carga 3x más rápido. Además, tienes soporte humano real, no un chatbot."
-  },
-  {
-    "question": "¿Qué pasa después de los 7 días? ¿Se termina el servicio?",
-    "answer": "Para nada. Los 7 días son solo el inicio. Tu página queda 100% funcional y puedes manejarla tú mismo. Pero ofrecemos planes de acompañamiento desde $25.000/mes para quienes quieren seguir optimizando y creciendo su presencia digital."
-  },
-  {
-    "question": "¿Cómo garantizan que mi página va a generar clientes?",
-    "answer": "Usamos una estructura probada: Hero optimizado para conversión, secciones que construyen confianza, formularios que realmente funcionan y llamadas a la acción estratégicamente ubicadas. Además, incluimos Google Analytics para que veas resultados reales desde el día 1."
-  },
-  {
-    "question": "¿Realmente entregan en 7 días hábiles?",
-    "answer": "Sí, es garantizado. Usamos Inteligencia Artificial en nuestro flujo de trabajo junto a un template de proyecto base que personalizamos específicamente para tu negocio. No empezamos desde cero, por eso podemos ser tan rápidos sin sacrificar calidad."
-  },
-  {
-    "question": "¿Qué necesito tener listo antes de empezar?",
-    "answer": "Principalmente: logo (o podemos crearte uno básico), 2-3 fotos tuyas/de tu trabajo, textos sobre tus servicios y datos de contacto. Si no tienes algo, te ayudamos a conseguirlo en la sesión de assessment incluida."
   }
-]
 }
