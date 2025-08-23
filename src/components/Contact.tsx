@@ -1,18 +1,33 @@
-// src/components/Contact.tsx
+// src/components/Contact.tsx - Gabriel Colmenares
 "use client";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { Mail, Phone, MessageCircle, Send, MapPin, Clock } from "lucide-react";
+import {
+  Mail,
+  MessageCircle,
+  Send,
+  MapPin,
+  Clock,
+  Instagram,
+  Youtube,
+  Headphones,
+  User,
+  Briefcase,
+  Calendar,
+  Mic,
+} from "lucide-react";
 import { ContactProps } from "@/lib/types";
 
 interface FormData {
   name: string;
   email: string;
   phone: string;
-  business: string;
+  project_type: string;
   message: string;
+  budget_range?: string;
+  event_date?: string;
 }
 
 export default function Contact({ data, className = "" }: ContactProps) {
@@ -82,23 +97,25 @@ export default function Contact({ data, className = "" }: ContactProps) {
   return (
     <section
       id="contact"
-      className={`section-padding-last bg-gradient-contact ${className}`}
+      className={`py-20 bg-gradient-to-b from-white to-[var(--color-secondary)] ${className}`}
     >
       <div className="container-custom">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.0 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           {/* Header */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--neutral-dark)] mb-6">
-              ¿Listo para tu nueva página web?
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-text)] mb-6">
+              {data.title}
             </h2>
-            <p className="text-xl text-[var(--neutral-medium)] max-w-3xl mx-auto">
-              Conversemos sobre tu proyecto. Te responderemos en menos de 2
-              horas.
+            <p className="text-xl text-[var(--color-text-light)] max-w-3xl mx-auto mb-4">
+              {data.subtitle}
+            </p>
+            <p className="text-lg text-[var(--color-accent)] font-medium">
+              Respuesta garantizada en 24 horas
             </p>
           </motion.div>
 
@@ -106,37 +123,36 @@ export default function Contact({ data, className = "" }: ContactProps) {
             {/* Contact Form */}
             <motion.div variants={itemVariants}>
               <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-lg">
-                <h3 className="text-2xl font-bold text-[var(--neutral-dark)] mb-6">
-                  Solicita tu página web
+                <h3 className="text-2xl font-bold text-[var(--color-text)] mb-6">
+                  Cuéntame sobre tu proyecto
                 </h3>
 
                 {isSubmitted && (
                   <div className="mb-6 p-4 bg-green-100 border border-green-200 rounded-lg text-green-700">
-                    ¡Gracias! Tu solicitud ha sido enviada. Te contactaremos
-                    pronto.
+                    ¡Gracias! Tu mensaje ha sido enviado. Te contactaré pronto.
                   </div>
                 )}
 
                 {submitError && (
                   <div className="mb-6 p-4 bg-red-100 border border-red-200 rounded-lg text-red-700">
-                    Hubo un error enviando tu mensaje. Por favor intenta
-                    nuevamente o contáctanos directamente.
+                    Hubo un error enviando tu mensaje. Por favor intenta por
+                    WhatsApp o Instagram.
                   </div>
                 )}
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   {/* Name */}
                   <div>
-                    <label className="block text-sm font-medium text-[var(--neutral-dark)] mb-2">
-                      Nombre completo *
+                    <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+                      Tu nombre *
                     </label>
                     <input
                       {...register("name", {
-                        required: "El nombre es requerido",
+                        required: "Tu nombre es requerido",
                       })}
                       type="text"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition-colors"
-                      placeholder="Tu nombre completo"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] transition-colors"
+                      placeholder="¿Cómo te llamas?"
                     />
                     {errors.name && (
                       <p className="mt-1 text-sm text-red-600">
@@ -147,19 +163,19 @@ export default function Contact({ data, className = "" }: ContactProps) {
 
                   {/* Email */}
                   <div>
-                    <label className="block text-sm font-medium text-[var(--neutral-dark)] mb-2">
+                    <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
                       Email *
                     </label>
                     <input
                       {...register("email", {
-                        required: "El email es requerido",
+                        required: "Tu email es requerido",
                         pattern: {
                           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                           message: "Email inválido",
                         },
                       })}
                       type="email"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition-colors"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] transition-colors"
                       placeholder="tu@email.com"
                     />
                     {errors.email && (
@@ -171,47 +187,92 @@ export default function Contact({ data, className = "" }: ContactProps) {
 
                   {/* Phone */}
                   <div>
-                    <label className="block text-sm font-medium text-[var(--neutral-dark)] mb-2">
-                      Teléfono *
+                    <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+                      WhatsApp
                     </label>
                     <input
-                      {...register("phone", {
-                        required: "El teléfono es requerido",
-                      })}
+                      {...register("phone")}
                       type="tel"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition-colors"
-                      placeholder="+56 9 1234 5678"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] transition-colors"
+                      placeholder="+56 9 1234 5678 (opcional)"
                     />
-                    {errors.phone && (
+                  </div>
+
+                  {/* Project Type */}
+                  <div>
+                    <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+                      Tipo de proyecto *
+                    </label>
+                    <select
+                      {...register("project_type", {
+                        required: "Selecciona el tipo de proyecto",
+                      })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] transition-colors"
+                    >
+                      <option value="">Selecciona una opción</option>
+                      <option value="stand_up">Stand Up Comedy - Show</option>
+                      <option value="corporate_event">
+                        Evento Corporativo
+                      </option>
+                      <option value="creative_direction">
+                        Dirección Creativa
+                      </option>
+                      <option value="private_event">Evento Privado</option>
+                      <option value="podcast_collaboration">
+                        Colaboración Podcast
+                      </option>
+                      <option value="content_creation">
+                        Creación de Contenido
+                      </option>
+                      <option value="other">Otro</option>
+                    </select>
+                    {errors.project_type && (
                       <p className="mt-1 text-sm text-red-600">
-                        {errors.phone.message}
+                        {errors.project_type.message}
                       </p>
                     )}
                   </div>
 
-                  {/* Business */}
+                  {/* Event Date */}
                   <div>
-                    <label className="block text-sm font-medium text-[var(--neutral-dark)] mb-2">
-                      Tu negocio/profesión
+                    <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+                      Fecha del evento (si aplica)
                     </label>
                     <input
-                      {...register("business")}
-                      type="text"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition-colors"
-                      placeholder="Ej: Abogado, Peluquería, Consultoría"
+                      {...register("event_date")}
+                      type="date"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] transition-colors"
                     />
+                  </div>
+
+                  {/* Budget Range */}
+                  <div>
+                    <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+                      Rango presupuestario (opcional)
+                    </label>
+                    <select
+                      {...register("budget_range")}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] transition-colors"
+                    >
+                      <option value="">Prefiero no especificar</option>
+                      <option value="under_500k">Menos de $500.000</option>
+                      <option value="500k_1m">$500.000 - $1.000.000</option>
+                      <option value="1m_2m">$1.000.000 - $2.000.000</option>
+                      <option value="over_2m">Más de $2.000.000</option>
+                      <option value="negotiate">A conversar</option>
+                    </select>
                   </div>
 
                   {/* Message */}
                   <div>
-                    <label className="block text-sm font-medium text-[var(--neutral-dark)] mb-2">
-                      Cuéntanos sobre tu proyecto
+                    <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+                      Cuéntame más detalles
                     </label>
                     <textarea
                       {...register("message")}
                       rows={4}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition-colors"
-                      placeholder="Describe brevemente qué tipo de página web necesitas..."
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] transition-colors"
+                      placeholder="Describe tu proyecto, audiencia, expectativas, o cualquier detalle que consideres importante..."
                     />
                   </div>
 
@@ -219,7 +280,7 @@ export default function Contact({ data, className = "" }: ContactProps) {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full btn-primary text-lg py-4 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-[var(--color-primary)] text-white py-4 rounded-xl font-semibold text-lg hover:bg-[var(--color-primary)]/90 transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <>
@@ -229,7 +290,7 @@ export default function Contact({ data, className = "" }: ContactProps) {
                     ) : (
                       <>
                         <Send size={20} className="mr-2" />
-                        Solicitar Mi Página Web
+                        Enviar mensaje
                       </>
                     )}
                   </button>
@@ -239,119 +300,212 @@ export default function Contact({ data, className = "" }: ContactProps) {
 
             {/* Contact Info */}
             <motion.div variants={itemVariants} className="space-y-8">
-              {/* Contact Methods */}
+              {/* Direct Contact */}
               <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-lg">
-                <h3 className="text-2xl font-bold text-[var(--neutral-dark)] mb-6">
-                  Otras formas de contacto
+                <h3 className="text-2xl font-bold text-[var(--color-text)] mb-6">
+                  Contacto directo
                 </h3>
 
-                <div className="space-y-6">
-                  {/* Phone */}
+                <div className="space-y-4">
+                  {/* WhatsApp */}
                   <a
-                    href={`tel:${data.phone}`}
-                    className="flex items-center space-x-4 p-4 rounded-lg hover:bg-[var(--neutral-light)] transition-colors group"
+                    href={`https://wa.me/${data.whatsapp?.replace(
+                      /\D/g,
+                      ""
+                    )}?text=Hola Gabriel! Vi tu página web y me interesa hablar sobre un proyecto`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-4 p-4 rounded-lg hover:bg-green-50 transition-colors group"
                   >
-                    <div className="w-12 h-12 bg-[var(--primary)]/10 rounded-lg flex items-center justify-center group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
-                      <Phone
-                        size={20}
-                        className="text-[var(--primary)] group-hover:text-white"
+                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-500 transition-colors">
+                      <MessageCircle
+                        size={24}
+                        className="text-green-600 group-hover:text-white transition-colors"
                       />
                     </div>
                     <div>
-                      <div className="font-semibold text-[var(--neutral-dark)]">
-                        Llamar ahora
+                      <div className="font-semibold text-[var(--color-text)]">
+                        WhatsApp (preferido)
                       </div>
-                      <div className="text-[var(--neutral-medium)]">
-                        {data.phone}
+                      <div className="text-[var(--color-text-light)]">
+                        {data.whatsapp}
                       </div>
                     </div>
                   </a>
 
                   {/* Email */}
                   <a
-                    href={`mailto:${data.email}`}
-                    className="flex items-center space-x-4 p-4 rounded-lg hover:bg-[var(--neutral-light)] transition-colors group"
+                    href={`mailto:${data.email}?subject=Proyecto con Gabriel Colmenares`}
+                    className="flex items-center space-x-4 p-4 rounded-lg hover:bg-blue-50 transition-colors group"
                   >
-                    <div className="w-12 h-12 bg-[var(--primary)]/10 rounded-lg flex items-center justify-center group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
+                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-500 transition-colors">
                       <Mail
-                        size={20}
-                        className="text-[var(--primary)] group-hover:text-white"
+                        size={24}
+                        className="text-blue-600 group-hover:text-white transition-colors"
                       />
                     </div>
                     <div>
-                      <div className="font-semibold text-[var(--neutral-dark)]">
-                        Enviar email
+                      <div className="font-semibold text-[var(--color-text)]">
+                        Email
                       </div>
-                      <div className="text-[var(--neutral-medium)]">
+                      <div className="text-[var(--color-text-light)]">
                         {data.email}
-                      </div>
-                    </div>
-                  </a>
-
-                  {/* WhatsApp */}
-                  <a
-                    href={`https://wa.me/${data.whatsapp}?text=Hola! Me interesa obtener una página web profesional`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-4 p-4 rounded-lg hover:bg-[var(--neutral-light)] transition-colors group"
-                  >
-                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-500 transition-colors">
-                      <MessageCircle
-                        size={20}
-                        className="text-green-600 group-hover:text-white"
-                      />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-[var(--neutral-dark)]">
-                        WhatsApp
-                      </div>
-                      <div className="text-[var(--neutral-medium)]">
-                        Respuesta inmediata
                       </div>
                     </div>
                   </a>
                 </div>
               </div>
 
-              {/* Business Hours & Location */}
+              {/* Social Media */}
               <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-lg">
-                <h3 className="text-xl font-bold text-[var(--neutral-dark)] mb-6">
-                  Información adicional
+                <h3 className="text-xl font-bold text-[var(--color-text)] mb-6">
+                  Sígueme en redes
                 </h3>
 
                 <div className="space-y-4">
-                  <div className="flex items-center space-x-3">
-                    <Clock size={20} className="text-[var(--primary)]" />
+                  {/* Instagram */}
+                  <a
+                    href={`https://instagram.com/${data.instagram?.replace(
+                      "@",
+                      ""
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-4 p-4 rounded-lg hover:bg-pink-50 transition-colors group"
+                  >
+                    <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center group-hover:bg-pink-500 transition-colors">
+                      <Instagram
+                        size={24}
+                        className="text-pink-600 group-hover:text-white transition-colors"
+                      />
+                    </div>
                     <div>
-                      <div className="font-medium text-[var(--neutral-dark)]">
-                        Horario de atención
+                      <div className="font-semibold text-[var(--color-text)]">
+                        Instagram
                       </div>
-                      <div className="text-[var(--neutral-medium)]">
-                        Lun - Vie: 9:00 - 18:00
+                      <div className="text-[var(--color-text-light)]">
+                        {data.instagram}
                       </div>
                     </div>
-                  </div>
+                  </a>
 
-                  <div className="flex items-center space-x-3">
-                    <MapPin size={20} className="text-[var(--primary)]" />
+                  {/* YouTube */}
+                  {data.youtube && (
+                    <a
+                      href={data.youtube}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-4 p-4 rounded-lg hover:bg-red-50 transition-colors group"
+                    >
+                      <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center group-hover:bg-red-500 transition-colors">
+                        <Youtube
+                          size={24}
+                          className="text-red-600 group-hover:text-white transition-colors"
+                        />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-[var(--color-text)]">
+                          YouTube
+                        </div>
+                        <div className="text-[var(--color-text-light)]">
+                          @uncolmenares
+                        </div>
+                      </div>
+                    </a>
+                  )}
+
+                  {/* Spotify/Podcast */}
+                  {data.spotify && (
+                    <a
+                      href={data.spotify}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-4 p-4 rounded-lg hover:bg-green-50 transition-colors group"
+                    >
+                      <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-600 transition-colors">
+                        <Headphones
+                          size={24}
+                          className="text-green-700 group-hover:text-white transition-colors"
+                        />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-[var(--color-text)]">
+                          Podcast
+                        </div>
+                        <div className="text-[var(--color-text-light)]">
+                          Escúchalo en Spotify
+                        </div>
+                      </div>
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              {/* Info adicional */}
+              <div className="bg-gradient-to-r from-[var(--color-primary)]/5 to-[var(--color-accent)]/5 rounded-2xl p-8 border border-[var(--color-primary)]/10">
+                <h3 className="text-xl font-bold text-[var(--color-text)] mb-4">
+                  Información importante
+                </h3>
+
+                <div className="space-y-4 text-sm">
+                  <div className="flex items-start space-x-3">
+                    <MapPin
+                      size={18}
+                      className="text-[var(--color-primary)] mt-0.5 flex-shrink-0"
+                    />
                     <div>
-                      <div className="font-medium text-[var(--neutral-dark)]">
+                      <div className="font-medium text-[var(--color-text)]">
                         Ubicación
                       </div>
-                      <div className="text-[var(--neutral-medium)]">
-                        Santiago, Chile
+                      <div className="text-[var(--color-text-light)]">
+                        Santiago, Chile (disponible para viajes)
                       </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Guarantee */}
-                <div className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
-                  <div className="text-green-700 font-medium mb-1">
-                    🚀 Respuesta garantizada
+                  <div className="flex items-start space-x-3">
+                    <Clock
+                      size={18}
+                      className="text-[var(--color-primary)] mt-0.5 flex-shrink-0"
+                    />
+                    <div>
+                      <div className="font-medium text-[var(--color-text)]">
+                        Respuesta
+                      </div>
+                      <div className="text-[var(--color-text-light)]">
+                        Garantizada en 24 horas
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-green-600 text-sm">
-                    Te contactaremos en menos de 2 horas hábiles
+
+                  <div className="flex items-start space-x-3">
+                    <Calendar
+                      size={18}
+                      className="text-[var(--color-primary)] mt-0.5 flex-shrink-0"
+                    />
+                    <div>
+                      <div className="font-medium text-[var(--color-text)]">
+                        Planificación
+                      </div>
+                      <div className="text-[var(--color-text-light)]">
+                        Reserva con mínimo 2 semanas de anticipación
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <Mic
+                      size={18}
+                      className="text-[var(--color-accent)] mt-0.5 flex-shrink-0"
+                    />
+                    <div>
+                      <div className="font-medium text-[var(--color-text)]">
+                        Especialidades
+                      </div>
+                      <div className="text-[var(--color-text-light)]">
+                        Stand up, eventos corporativos, dirección creativa
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

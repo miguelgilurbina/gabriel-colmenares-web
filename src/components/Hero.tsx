@@ -1,11 +1,12 @@
-// src/components/Hero.tsx
+// src/components/Hero.tsx - Gabriel Colmenares (Clean Version)
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Zap, Shield, Clock, Target } from "lucide-react";
+import { ArrowRight, Star, Users, Mic, Calendar, MapPin } from "lucide-react";
 import { HeroProps } from "@/lib/types";
+import Image from "next/image";
 
-export default function Hero({ data, className = "" }: HeroProps) {
+export default function Hero({ data, site, className = "" }: HeroProps) {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -18,8 +19,8 @@ export default function Hero({ data, className = "" }: HeroProps) {
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.6,
-        staggerChildren: 0.15,
+        duration: 0.8,
+        staggerChildren: 0.2,
       },
     },
   };
@@ -35,178 +36,256 @@ export default function Hero({ data, className = "" }: HeroProps) {
     },
   };
 
-  const featureIcons = {
-    "Entrega garantizada en 7 días": Clock,
-    "100% responsive y optimizado": Shield,
-    "SEO incluido para aparecer en Google": Target,
-    "Formulario que captura leads reales": Check,
-  };
-
   return (
     <section
       id="hero"
-      className={`bg-gradient-hero section-padding-first relative min-h-screen flex items-center justify-center overflow-hidden ${className}`}
+      className={`relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--color-background)] via-[var(--color-secondary)] to-white ${className}`}
     >
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-primary from-[var(--neutral-light)] via-white to-[var(--neutral-light)]/50"></div>
+      {/* Background Decoration */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[var(--color-primary)]/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[var(--color-accent)]/10 rounded-full blur-3xl"></div>
+      </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute top-20 left-10 w-64 h-64 bg-[var(--primary)]/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-[var(--accent)]/10 rounded-full blur-3xl"></div>
-
-      <div className="relative z-10 container-custom">
+      <div className="relative z-10 container-custom pt-20">
         <motion.div
-          className="max-w-6xl mx-auto text-center"
+          className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* Urgency Badge */}
-          <motion.div variants={itemVariants} className="mb-8">
-            <div className="inline-flex items-center px-6 py-3 btn-primary rounded-full text-white font-semibold text-sm mb-6 shadow-lg">
-              <Zap size={18} className="mr-2 animate-pulse" />
-              Solo 5 cupos disponibles este mes
-            </div>
+          {/* Left Column - Content */}
+          <div className="text-center lg:text-left">
+            {/* Badge Venezuela/Santiago */}
+            <motion.div variants={itemVariants} className="mb-6">
+              <div className="inline-flex items-center px-4 py-2 bg-[var(--color-primary)]/10 rounded-full text-[var(--color-primary)] font-medium text-sm border border-[var(--color-primary)]/20">
+                <MapPin size={16} className="mr-2" />
+                Venezolano en {site.location}
+              </div>
+            </motion.div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-[var(--neutral-dark)] mb-6 leading-tight">
-              {data.headline.split(" ").map((word, index) => {
-                if (word === "7" || word === "Días") {
-                  return (
-                    <span key={index} className="text-gradient">
-                      {word}{" "}
-                    </span>
-                  );
-                }
-                return <span key={index}>{word} </span>;
-              })}
-            </h1>
+            <motion.div variants={itemVariants}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-text)] mb-4 leading-tight">
+                {data.headline}
+              </h1>
+              <div className="text-xl md:text-2xl text-[var(--color-accent)] font-semibold mb-6">
+                {data.subtitle}
+              </div>
+            </motion.div>
 
-            <p className="text-lg md:text-xl text-[var(--neutral-medium)] max-w-3xl mx-auto leading-relaxed">
-              {data.subtitle}
-            </p>
-          </motion.div>
-
-          {/* CTAs */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
-          >
-            <button
-              onClick={() => scrollToSection("#contact")}
-              className="btn-primary text-lg px-10 py-5 flex items-center group shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+            {/* Description */}
+            <motion.p
+              variants={itemVariants}
+              className="text-lg text-[var(--color-text-light)] mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed"
             >
-              {data.cta_primary}
-              <ArrowRight
-                size={22}
-                className="ml-3 group-hover:translate-x-1 transition-transform"
-              />
-            </button>
+              {data.description}
+            </motion.p>
 
-            {/* <button
-              onClick={() => scrollToSection("#portfolio")}
-              className="btn-secondary text-lg px-10 py-5 hover:bg-[var(--primary)]/10 transition-all duration-300"
+            {/* CTAs */}
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12"
             >
-              {data.cta_secondary}
-            </button> */}
-          </motion.div>
+              <button
+                onClick={() => scrollToSection(data.primaryCTA.action)}
+                className="bg-[var(--color-primary)] text-white px-8 py-4 rounded-xl font-semibold text-lg flex items-center justify-center group hover:bg-[var(--color-primary)]/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                <Calendar size={22} className="mr-3" />
+                {data.primaryCTA.text}
+                <ArrowRight
+                  size={22}
+                  className="ml-3 group-hover:translate-x-1 transition-transform"
+                />
+              </button>
 
-          {/* Features Grid - OPTIMIZADO */}
-          <motion.div
-            variants={itemVariants}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto mb-16"
-          >
-            {data.features.map((feature, index) => {
-              const IconComponent =
-                featureIcons[feature as keyof typeof featureIcons] || Check;
+              <button
+                onClick={() => scrollToSection(data.secondaryCTA.action)}
+                className="border-2 border-[var(--color-primary)] text-[var(--color-primary)] px-8 py-4 rounded-xl font-semibold text-lg hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
+              >
+                {data.secondaryCTA.text}
+              </button>
+            </motion.div>
 
-              return (
-                <div
-                  key={index}
-                  className="bg-white/90 backdrop-blur-sm rounded-lg md:rounded-xl p-4 md:p-6 border border-gray-100 hover:border-[var(--primary)]/30 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group"
-                >
-                  <div className="w-8 h-8 md:w-10 md:h-10 bg-[var(--primary)]/10 rounded-lg flex items-center justify-center mb-3 md:mb-4 group-hover:bg-[var(--primary)]/20 transition-colors mx-auto">
-                    <IconComponent
-                      size={24}
-                      className="text-[var(--primary)]"
-                    />
-                  </div>
-                  <p className="text-[var(--neutral-dark)] font-medium text-sm md:text-base text-center leading-snug">
-                    {feature}
-                  </p>
+            {/* Quick Stats */}
+            <motion.div
+              variants={itemVariants}
+              className="grid grid-cols-3 gap-6 max-w-sm mx-auto lg:mx-0 mb-8"
+            >
+              <div className="text-center lg:text-left">
+                <div className="flex items-center justify-center lg:justify-start space-x-1 mb-1">
+                  <span className="text-2xl font-bold text-[var(--color-primary)]">
+                    5
+                  </span>
+                  <Star size={20} className="text-[var(--color-accent)]" />
                 </div>
-              );
-            })}
-          </motion.div>
+                <p className="text-sm text-[var(--color-text-light)]">
+                  Años experiencia
+                </p>
+              </div>
 
-          {/* Social Proof MEJORADO */}
+              <div className="text-center lg:text-left">
+                <div className="flex items-center justify-center lg:justify-start space-x-1 mb-1">
+                  <span className="text-2xl font-bold text-[var(--color-primary)]">
+                    4
+                  </span>
+                  <Users size={20} className="text-[var(--color-accent)]" />
+                </div>
+                <p className="text-sm text-[var(--color-text-light)]">
+                  Sold Outs Mix
+                </p>
+              </div>
+
+              <div className="text-center lg:text-left">
+                <div className="flex items-center justify-center lg:justify-start space-x-1 mb-1">
+                  <span className="text-2xl font-bold text-[var(--color-primary)]">
+                    100
+                  </span>
+                  <Mic size={20} className="text-[var(--color-accent)]" />
+                </div>
+                <p className="text-sm text-[var(--color-text-light)]">
+                  Show +30k20
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Social Proof */}
+            <motion.div
+              variants={itemVariants}
+              className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-gray-100 shadow-sm"
+            >
+              <p className="text-sm text-[var(--color-text-light)] text-center lg:text-left">
+                <span className="text-[var(--color-text)] font-semibold">
+                  Teloneado a:
+                </span>{" "}
+                Luis Slimming, Esteban Duch, Doctor Escalona
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Right Column - Image/Visual */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 text-center"
+            className="relative order-first lg:order-last"
           >
-            {/* Tiempo de Entrega */}
-            <div className="flex flex-col items-center">
-              <div className="flex items-center space-x-2 mb-2">
-                <Clock size={20} className="text-[var(--primary)]" />
-                <p className="text-2xl md:text-3xl font-bold text-[var(--primary)]">
-                  7 días
-                </p>
-              </div>
-              <p className="text-[var(--neutral-medium)] text-sm">
-                Tiempo garantizado
-                <br />
-                de entrega
-              </p>
-            </div>
+            <div className="relative max-w-lg mx-auto">
+              {/* Main Image Container */}
+              {data.backgroundImage ? (
+                <Image
+                  src={data.backgroundImage}
+                  alt={`${site.name} en vivo`}
+                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center p-8">
+                    <div className="w-32 h-32 bg-[var(--color-primary)]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Mic size={64} className="text-[var(--color-primary)]" />
+                    </div>
+                    <p className="text-[var(--color-text-light)] text-sm">
+                      Imagen de Gabriel
+                      <br />
+                      en tarima próximamente
+                    </p>
+                  </div>
+                </div>
+              )}
 
-            <div className="hidden md:block w-px h-12 bg-gray-300"></div>
+              {/* Floating Elements */}
+              <motion.div
+                className="absolute -top-4 -left-4 bg-white p-3 rounded-lg shadow-lg border border-gray-100"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1, duration: 0.6 }}
+              >
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-sm font-medium text-[var(--color-text)]">
+                    Live Santiago
+                  </span>
+                </div>
+              </motion.div>
 
-            {/* Garantía */}
-            <div className="flex flex-col items-center">
-              <div className="flex items-center space-x-2 mb-2">
-                <Shield size={20} className="text-[var(--accent)]" />
-                <p className="text-2xl md:text-3xl font-bold text-[var(--accent)]">
-                  100%
-                </p>
-              </div>
-              <p className="text-[var(--neutral-medium)] text-sm">
-                Garantía de
-                <br />
-                satisfacción
-              </p>
-            </div>
+              <motion.div
+                className="absolute -bottom-4 -right-4 bg-[var(--color-accent)] p-3 rounded-lg shadow-lg text-white"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.2, duration: 0.6 }}
+              >
+                <div className="text-center">
+                  <div className="text-lg font-bold">180</div>
+                  <div className="text-xs opacity-90">meta diciembre</div>
+                </div>
+              </motion.div>
 
-            <div className="hidden md:block w-px h-12 bg-gray-300"></div>
-
-            {/* Precio Competitivo */}
-            <div className="flex flex-col items-center">
-              <div className="flex items-center space-x-2 mb-2">
-                <Target size={20} className="text-[var(--primary)]" />
-                <p className="text-2xl md:text-3xl font-bold text-gradient">
-                  $250K
-                </p>
-              </div>
-              <p className="text-[var(--neutral-medium)] text-sm">
-                Precio fijo
-                <br />
-                sin sorpresas
-              </p>
+              <motion.div
+                className="absolute top-1/2 -right-6 bg-white p-3 rounded-lg shadow-lg border border-gray-100"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.4, duration: 0.6 }}
+              >
+                <div className="flex items-center space-x-2">
+                  <Star size={16} className="text-[var(--color-accent)]" />
+                  <span className="text-sm font-medium text-[var(--color-text)]">
+                    Alien Caribeño
+                  </span>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
+        </motion.div>
 
-          {/* Garantía destacada */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-12 p-4 md:p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl border border-green-200 max-w-2xl mx-auto"
-          >
-            <div className="flex items-center justify-center space-x-3">
-              <Shield size={24} className="text-green-600" />
-              <p className="text-green-800 font-semibold text-sm md:text-base">
-                <strong>Garantía Total:</strong> Si no cumplimos, te devolvemos
-                tu dinero.
-              </p>
+        {/* Trust Indicators */}
+        <motion.div
+          variants={itemVariants}
+          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
+        >
+          <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-100 text-center">
+            <div className="text-lg font-bold text-[var(--color-primary)] mb-1">
+              WeWork
             </div>
-          </motion.div>
+            <p className="text-xs text-[var(--color-text-light)]">Las Condes</p>
+          </div>
+          <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-100 text-center">
+            <div className="text-lg font-bold text-[var(--color-primary)] mb-1">
+              3 años
+            </div>
+            <p className="text-xs text-[var(--color-text-light)]">
+              Cliente recurrente
+            </p>
+          </div>
+          <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-100 text-center">
+            <div className="text-lg font-bold text-[var(--color-accent)] mb-1">
+              Alien
+            </div>
+            <p className="text-xs text-[var(--color-text-light)]">Caribeño</p>
+          </div>
+          <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-100 text-center">
+            <div className="text-lg font-bold text-[var(--color-primary)] mb-1">
+              100%
+            </div>
+            <p className="text-xs text-[var(--color-text-light)]">Directo</p>
+          </div>
+        </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2, duration: 0.6 }}
+        >
+          <div className="flex flex-col items-center space-y-2">
+            <span className="text-sm text-[var(--color-text-light)]">
+              Conoce mi historia
+            </span>
+            <div className="w-6 h-10 border-2 border-[var(--color-primary)]/30 rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-[var(--color-primary)] rounded-full mt-2 animate-bounce"></div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

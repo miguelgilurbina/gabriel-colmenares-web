@@ -1,22 +1,16 @@
-// src/components/Services.tsx
+// src/components/Services.tsx - Gabriel Colmenares
 "use client";
 
 import { motion } from "framer-motion";
 import {
-  Check,
-  Star,
-  TrendingUp,
-  Shield,
+  Mic,
+  Users,
+  Video,
   Headphones,
-  FileText,
-  BarChart,
-  Zap,
-  Monitor,
-  Search,
-  Mail,
-  Code,
-  Globe,
-  Server,
+  PenTool,
+  Star,
+  ArrowRight,
+  Crown,
 } from "lucide-react";
 import { ServicesProps } from "@/lib/types";
 
@@ -34,7 +28,7 @@ export default function Services({ data, className = "" }: ServicesProps) {
       opacity: 1,
       transition: {
         duration: 0.6,
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   };
@@ -48,20 +42,19 @@ export default function Services({ data, className = "" }: ServicesProps) {
     },
   };
 
-  // Feature icons mapping
-  const featureIcons = {
-    "Diseño 100% responsive": Monitor,
-    "SEO básico optimizado": Search,
-    "Formulario de contacto funcional": Mail,
-    "Carga ultrarrápida (Next.js)": Zap,
-    "Google Analytics configurado": BarChart,
-    "Entrega con código fuente": Code,
+  // Icon mapping para servicios de Gabriel
+  const serviceIcons = {
+    Mic: Mic,
+    Users: Users,
+    Video: Video,
+    Headphones: Headphones,
+    PenTool: PenTool,
   };
 
   return (
     <section
       id="services"
-      className={`section-padding bg-gradient-services ${className}`}
+      className={`py-20 bg-gradient-to-b from-white to-[var(--color-secondary)] ${className}`}
     >
       <div className="container-custom">
         <motion.div
@@ -71,252 +64,225 @@ export default function Services({ data, className = "" }: ServicesProps) {
           viewport={{ once: true, amount: 0.1 }}
         >
           {/* Header */}
-          <motion.div variants={itemVariants} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--neutral-dark)] ">
-              {data.title}
+          <motion.div variants={itemVariants} className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-text)] mb-6">
+              Lo Que Hago
             </h2>
-            <p className="text-xl text-[var(--neutral-medium)] max-w-3xl mx-auto mt-4">
-              {data.subtitle}
+            <p className="text-xl text-[var(--color-text-light)] max-w-3xl mx-auto">
+              Creatividad multifacética con enfoque genuino. Cada proyecto es
+              único, cada conexión es auténtica.
             </p>
           </motion.div>
 
-          {/* Main Service - Landing Page */}
-          <motion.div variants={itemVariants} className="mb-12">
-            <div className="bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] rounded-2xl p-8 md:p-12 text-white relative overflow-hidden">
-              {/* Background decoration */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-32 translate-x-32"></div>
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-24 -translate-x-24"></div>
+          {/* Services Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
+            {data.map((service, index) => {
+              const IconComponent =
+                serviceIcons[service.icon as keyof typeof serviceIcons] || Mic;
 
-              <div className="relative z-10">
-                <div className="text-center mb-12">
-                  <div className="inline-flex items-center px-4 py-2 bg-white/20 rounded-full text-white/90 text-sm font-medium mb-4">
-                    <Star size={16} className="mr-2" />
-                    Servicio Principal
-                  </div>
-                  <h3 className="text-3xl md:text-4xl font-bold mb-4">
-                    Landing Page Profesional
-                  </h3>
-                  <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                    Tu página web completa, optimizada y lista para generar
-                    leads en 7 días hábiles
-                  </p>
-                  <div className="text-5xl md:text-6xl font-bold mb-2">
-                    $250.000
-                  </div>
-                  <div className="text-white/80">
-                    Precio fijo • Sin sorpresas • Pago 50/50
-                  </div>
-                </div>
-
-                {/* Features Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {data.main_service?.features.map((feature, index) => {
-                    const IconComponent =
-                      featureIcons[feature as keyof typeof featureIcons] ||
-                      Check;
-                    return (
-                      <div
-                        key={index}
-                        className="flex items-center space-x-3 bg-white/10 rounded-lg p-4 backdrop-blur-sm"
-                      >
-                        <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                          <IconComponent size={18} className="text-white" />
-                        </div>
-                        <span className="text-white/95 font-medium">
-                          {feature}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <div className="text-center mt-8">
-                  <a
-                    href="https://calendly.com/miguel-gil-9210/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <button className="bg-white text-[var(--primary)] px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/90 transition-colors duration-300 shadow-lg">
-                      Empezar Mi Proyecto
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Post-Delivery Journey - NUEVA VERSIÓN INFORMATIVA */}
-          <motion.div variants={itemVariants} className="mb-16">
-            <div className="text-center mb-12">
-              <h3 className="text-2xl md:text-3xl font-bold text-[var(--neutral-dark)] mb-4">
-                ¿Qué Pasa Después de los 7 Días?
-              </h3>
-              <p className="text-lg text-[var(--neutral-medium)] max-w-3xl mx-auto mb-8">
-                Tu web está lista, pero el viaje apenas comienza. No somos de
-                los que entregamos y desaparecemos. Estamos aquí para
-                acompañarte en el crecimiento de tu negocio a largo plazo.
-              </p>
-              <div className="inline-flex items-center px-6 py-3 bg-[var(--primary)]/10 rounded-full text-[var(--primary)] font-medium">
-                🚀 Tu socio tecnológico a largo plazo
-              </div>
-            </div>
-
-            {/* Timeline Visual */}
-            <div className="max-w-4xl mx-auto mb-12">
-              <div className="relative">
-                {/* Timeline Line */}
-                <div className="absolute top-8 left-8 right-8 h-0.5 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] hidden md:block"></div>
-
-                <div className="grid md:grid-cols-3 gap-8">
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
-                      <Check size={32} className="text-white" />
-                    </div>
-                    <h4 className="font-bold text-[var(--neutral-dark)] mb-2">
-                      Día 7: Entrega
-                    </h4>
-                    <p className="text-[var(--neutral-medium)] text-sm">
-                      Tu web está online y funcionando perfecto
-                    </p>
-                  </div>
-
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-[var(--primary)] rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
-                      <TrendingUp size={32} className="text-white" />
-                    </div>
-                    <h4 className="font-bold text-[var(--neutral-dark)] mb-2">
-                      Mes 1-3: Crecimiento
-                    </h4>
-                    <p className="text-[var(--neutral-medium)] text-sm">
-                      Optimizamos y mejoramos basado en resultados reales
-                    </p>
-                  </div>
-
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-[var(--accent)] rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
-                      <Star size={32} className="text-white" />
-                    </div>
-                    <h4 className="font-bold text-[var(--neutral-dark)] mb-2">
-                      Largo Plazo: Éxito
-                    </h4>
-                    <p className="text-[var(--neutral-medium)] text-sm">
-                      Tu web se convierte en tu mejor vendedor
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Maintenance Options - MÁS INFORMATIVO */}
-            <div className="bg-gradient-to-r from-[var(--primary)]/5 to-[var(--accent)]/5 rounded-2xl p-8 border border-[var(--primary)]/20">
-              <div className="text-center mb-8">
-                <h4 className="text-2xl md:text-3xl font-bold text-[var(--neutral-dark)] mb-2">
-                  Opciones de Acompañamiento Disponibles
-                </h4>
-                <p className="text-[var(--neutral-medium)]">
-                  Una vez entregada tu web, puedes elegir cómo quieres que te
-                  acompañemos
-                </p>
-              </div>
-
-              {/* NUEVA VERSIÓN - MÁS INFORMATIVA */}
-              <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                {data.maintenance_plans.map((plan, index) => (
+              return (
+                <motion.div
+                  key={service.id}
+                  variants={itemVariants}
+                  className={`relative group ${
+                    service.featured
+                      ? "md:col-span-2 lg:col-span-1 lg:row-span-2"
+                      : ""
+                  }`}
+                >
                   <div
-                    key={index}
-                    className="bg-white rounded-xl p-6 border border-gray-200 hover:border-[var(--primary)]/30 transition-all duration-300 hover:shadow-md"
+                    className={`
+                    ${
+                      service.featured
+                        ? "bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] text-white"
+                        : "bg-white border border-gray-200 hover:border-[var(--color-primary)]/30"
+                    } 
+                    rounded-2xl p-6 lg:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full relative overflow-hidden
+                  `}
                   >
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex-1">
-                        <h5 className="text-lg font-bold text-[var(--neutral-dark)] mb-1">
-                          {plan.name}
-                        </h5>
-                        <p className="text-[var(--neutral-medium)] text-sm mb-3">
-                          {plan.description}
-                        </p>
-                        {plan.popular && (
-                          <div className="inline-flex items-center px-3 py-1 bg-[var(--accent)]/10 text-[var(--accent)] rounded-full text-xs font-medium">
-                            ⭐ Más elegido
+                    {/* Background decoration para el servicio destacado */}
+                    {service.featured && (
+                      <>
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-16 translate-x-16"></div>
+                        <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-12 -translate-x-12"></div>
+                      </>
+                    )}
+
+                    {/* Badges */}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-2">
+                        {service.featured && (
+                          <div className="flex items-center px-3 py-1 bg-white/20 rounded-full text-white text-xs font-medium">
+                            <Star size={12} className="mr-1" />
+                            Servicio Estrella
+                          </div>
+                        )}
+                        {service.premium && !service.featured && (
+                          <div className="flex items-center px-3 py-1 bg-[var(--color-accent)]/10 text-[var(--color-accent)] rounded-full text-xs font-medium">
+                            <Crown size={12} className="mr-1" />
+                            Premium
                           </div>
                         )}
                       </div>
-                      <div className="text-right ml-4">
-                        <div className="text-xl font-bold text-[var(--primary)]">
-                          {plan.price}
-                        </div>
-                        <div className="text-[var(--neutral-medium)] text-sm">
-                          {plan.period}
-                        </div>
-                      </div>
                     </div>
 
-                    {/* Features - Solo top 4 para mantener compacto */}
-                    <div className="space-y-2 mb-4">
-                      {plan.features
-                        .slice(0, 4)
-                        .map((feature, featureIndex) => (
-                          <div
-                            key={featureIndex}
-                            className="flex items-center text-sm"
-                          >
-                            <Check
-                              size={14}
-                              className="text-[var(--primary)] mr-2 flex-shrink-0"
-                            />
-                            <span className="text-[var(--neutral-dark)]">
-                              {feature}
-                            </span>
-                          </div>
-                        ))}
-                      {plan.features.length > 4 && (
-                        <div className="text-xs text-[var(--neutral-medium)] ml-5 mt-2">
-                          +{plan.features.length - 4} servicios adicionales
-                          incluidos
-                        </div>
+                    {/* Icon */}
+                    <div
+                      className={`
+                      w-16 h-16 rounded-2xl flex items-center justify-center mb-6 
+                      ${
+                        service.featured
+                          ? "bg-white/20"
+                          : "bg-[var(--color-primary)]/10 group-hover:bg-[var(--color-primary)]/20"
+                      } 
+                      transition-colors
+                    `}
+                    >
+                      <IconComponent
+                        size={32}
+                        className={
+                          service.featured
+                            ? "text-white"
+                            : "text-[var(--color-primary)]"
+                        }
+                      />
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative z-10">
+                      <h3
+                        className={`
+                        text-xl lg:text-2xl font-bold mb-4 
+                        ${
+                          service.featured
+                            ? "text-white"
+                            : "text-[var(--color-text)]"
+                        }
+                      `}
+                      >
+                        {service.title}
+                      </h3>
+
+                      <p
+                        className={`
+                        leading-relaxed mb-6 
+                        ${
+                          service.featured
+                            ? "text-white/90"
+                            : "text-[var(--color-text-light)]"
+                        }
+                        ${
+                          service.featured
+                            ? "text-base lg:text-lg"
+                            : "text-base"
+                        }
+                      `}
+                      >
+                        {service.description}
+                      </p>
+
+                      {/* CTA específico para Stand Up */}
+                      {service.featured && (
+                        <button
+                          onClick={() => scrollToSection("#shows")}
+                          className="bg-white text-[var(--color-primary)] px-6 py-3 rounded-lg font-semibold hover:bg-white/90 transition-colors flex items-center group"
+                        >
+                          Ver Próximos Shows
+                          <ArrowRight
+                            size={18}
+                            className="ml-2 group-hover:translate-x-1 transition-transform"
+                          />
+                        </button>
                       )}
                     </div>
+
+                    {/* Hover effect for non-featured services */}
+                    {!service.featured && (
+                      <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/5 to-[var(--color-accent)]/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+                    )}
                   </div>
-                ))}
-              </div>
+                </motion.div>
+              );
+            })}
+          </div>
 
-              {/* CTA MÁS SUAVE */}
-              <div className="text-center mt-8">
-                <p className="text-[var(--neutral-medium)] text-sm mt-4">
-                  💡 Estos servicios se evalúan después de la entrega de tu web
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Additional Services CTA */}
+          {/* Bottom CTA Section */}
           <motion.div variants={itemVariants} className="text-center">
-            <div className="bg-gradient-to-r from-[var(--primary)]/5 to-[var(--accent)]/5 rounded-2xl p-8 border border-[var(--primary)]/20 max-w-4xl mx-auto">
-              <div className="mb-6">
-                <h3 className="text-2xl md:text-3xl font-bold text-[var(--neutral-dark)] mb-4">
-                  ¿Necesitas algo más específico?
-                </h3>
-                <p className="text-[var(--neutral-medium)] max-w-2xl mx-auto">
-                  Cada negocio es único. Si tienes necesidades especiales como
-                  e-commerce, portales de membresía o integraciones específicas,
-                  conversemos.
-                </p>
-              </div>
+            <div className="bg-gradient-to-r from-[var(--color-primary)]/5 to-[var(--color-accent)]/5 rounded-2xl p-8 lg:p-12 border border-[var(--color-primary)]/10 max-w-4xl mx-auto">
+              <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-text)] mb-4">
+                ¿Necesitas algo específico?
+              </h3>
+              <p className="text-[var(--color-text-light)] mb-8 max-w-2xl mx-auto">
+                Cada proyecto es único. Si tienes una idea especial o necesitas
+                algo que no ves aquí, hablemos. La creatividad no tiene límites.
+              </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <button
                   onClick={() => scrollToSection("#contact")}
-                  className="btn-primary px-8 py-4"
+                  className="bg-[var(--color-primary)] text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-[var(--color-primary)]/90 transition-colors flex items-center group"
                 >
-                  Solicitar Cotización Personalizada
+                  Hablemos de tu proyecto
+                  <ArrowRight
+                    size={20}
+                    className="ml-2 group-hover:translate-x-1 transition-transform"
+                  />
                 </button>
-                {/* <button className="btn-secondary px-8 py-4">
-                  Ver Ejemplos de Proyectos
-                </button> */}
+
+                <button
+                  onClick={() => scrollToSection("#portfolio")}
+                  className="border-2 border-[var(--color-primary)] text-[var(--color-primary)] px-8 py-4 rounded-xl font-semibold text-lg hover:bg-[var(--color-primary)] hover:text-white transition-colors"
+                >
+                  Ver mi trabajo
+                </button>
               </div>
 
-              <div className="mt-6 text-sm text-[var(--neutral-medium)]">
-                💡 <strong>Proyectos especiales:</strong> E-commerce, sistemas
-                de reservas, portales corporativos
+              <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm text-[var(--color-text-light)]">
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-[var(--color-accent)] rounded-full"></div>
+                  <span>Respuesta en 24h</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-[var(--color-accent)] rounded-full"></div>
+                  <span>Trato directo conmigo</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-[var(--color-accent)] rounded-full"></div>
+                  <span>Sin intermediarios</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Achievement Banner */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-16 bg-white rounded-2xl p-6 lg:p-8 border border-gray-200 shadow-sm"
+          >
+            <div className="grid md:grid-cols-3 gap-6 text-center">
+              <div>
+                <div className="text-3xl font-bold text-[var(--color-primary)] mb-2">
+                  5 años
+                </div>
+                <p className="text-[var(--color-text-light)]">
+                  De experiencia en Santiago
+                </p>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-[var(--color-accent)] mb-2">
+                  4 sold outs
+                </div>
+                <p className="text-[var(--color-text-light)]">
+                  Mix Chatarritas consecutivos
+                </p>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-[var(--color-primary)] mb-2">
+                  100%
+                </div>
+                <p className="text-[var(--color-text-light)]">
+                  Trato directo y genuino
+                </p>
               </div>
             </div>
           </motion.div>

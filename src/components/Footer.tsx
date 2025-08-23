@@ -1,4 +1,4 @@
-// src/components/Footer.tsx
+// src/components/Footer.tsx - Adaptado para Gabriel Colmenares
 "use client";
 
 import { motion } from "framer-motion";
@@ -6,19 +6,20 @@ import { useRouter, usePathname } from "next/navigation";
 import {
   Heart,
   Mail,
-  Phone,
   MessageCircle,
   Instagram,
-  Linkedin,
+  Youtube,
+  Headphones,
+  MapPin,
 } from "lucide-react";
-import { SiteData } from "@/lib/types";
+import { FooterData } from "@/lib/types";
 
 interface FooterProps {
-  data: SiteData["site"] & SiteData["contact"];
+  data: FooterData;
   className?: string;
 }
 
-// Hook reutilizable para navegación inteligente (mismo que header)
+// Hook reutilizable para navegación inteligente
 const useSmartNavigation = () => {
   const pathname = usePathname();
   const router = useRouter();
@@ -26,13 +27,11 @@ const useSmartNavigation = () => {
 
   const navigateToSection = (href: string) => {
     if (isHomePage) {
-      // Si estamos en home, scroll directo
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      // Si estamos en otra página, ir a home y luego scroll
       router.push(`/${href}`);
     }
   };
@@ -51,10 +50,10 @@ const useSmartNavigation = () => {
 
 export default function Footer({ data, className = "" }: FooterProps) {
   const currentYear = new Date().getFullYear();
-  const { isHomePage, navigateToSection, navigateToPage, pathname } =
+  const { isHomePage, navigateToSection, navigateToPage } =
     useSmartNavigation();
 
-  // Navegación adaptativa para footer
+  // Navegación adaptativa para Gabriel
   const navigation = {
     main: [
       {
@@ -63,31 +62,31 @@ export default function Footer({ data, className = "" }: FooterProps) {
         type: isHomePage ? "scroll" : "link",
       },
       {
-        name: "Servicios",
-        href: isHomePage ? "#services" : "/#services",
+        name: "Mi Historia",
+        href: isHomePage ? "#about" : "/#about",
         type: isHomePage ? "scroll" : "link",
       },
       {
-        name: "Proceso",
-        href: isHomePage ? "#process" : "/#process",
+        name: "Shows",
+        href: isHomePage ? "#shows" : "/#shows",
         type: isHomePage ? "scroll" : "link",
       },
     ],
     support: [
       {
-        name: "Preguntas Frecuentes",
-        href: isHomePage ? "#faq" : "/#faq",
+        name: "Servicios",
+        href: isHomePage ? "#services" : "/#services",
+        type: isHomePage ? "scroll" : "link",
+      },
+      {
+        name: "Portfolio",
+        href: isHomePage ? "#portfolio" : "/#portfolio",
         type: isHomePage ? "scroll" : "link",
       },
       {
         name: "Contacto",
         href: isHomePage ? "#contact" : "/#contact",
         type: isHomePage ? "scroll" : "link",
-      },
-      {
-        name: "Sobre Nosotros",
-        href: "/about",
-        type: "link",
       },
     ],
   };
@@ -99,14 +98,11 @@ export default function Footer({ data, className = "" }: FooterProps) {
   }) => {
     if (item.type === "link") {
       if (item.href.startsWith("/#")) {
-        // Para enlaces que van a home + sección
-        navigateToSection(item.href.substring(1)); // Quita el /
+        navigateToSection(item.href.substring(1));
       } else {
-        // Para páginas regulares
         navigateToPage(item.href);
       }
     } else {
-      // Para scroll interno
       navigateToSection(item.href);
     }
   };
@@ -119,26 +115,34 @@ export default function Footer({ data, className = "" }: FooterProps) {
     }
   };
 
+  // Social links adaptados para Gabriel
   const socialLinks = [
     {
       name: "Instagram",
-      href: data.social?.instagram,
+      href: `https://instagram.com/${
+        data.instagram?.replace("@", "") || "uncolmenares"
+      }`,
       icon: Instagram,
     },
     {
-      name: "LinkedIn",
-      href: data.social?.linkedin,
-      icon: Linkedin,
+      name: "YouTube",
+      href: data.youtube,
+      icon: Youtube,
+    },
+    {
+      name: "Spotify",
+      href: data.spotify,
+      icon: Headphones,
     },
   ];
 
   return (
-    <footer className={`bg-[var(--neutral-dark)] text-white ${className}`}>
+    <footer className={`bg-[var(--color-primary)] text-white ${className}`}>
       <div className="container-custom">
         {/* Main Footer Content */}
         <div className="py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Brand Section - Logo clickeable */}
+            {/* Brand Section - Gabriel */}
             <div className="lg:col-span-2">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -151,43 +155,42 @@ export default function Footer({ data, className = "" }: FooterProps) {
                   onClick={handleLogoClick}
                   className="flex items-center space-x-3 mb-6 hover:opacity-80 transition-opacity"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold text-xl">7D</span>
+                  <div className="w-12 h-12 bg-gradient-to-br from-[var(--color-accent)] to-white/20 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-xl">GC</span>
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold">{data.name}</h3>
-                    <p className="text-gray-400 text-sm">{data.tagline}</p>
+                    <p className="text-white/80 text-sm">{data.business}</p>
                   </div>
                 </button>
 
-                <p className="text-gray-300 mb-6 max-w-md">
-                  {data.description}
+                <p className="text-white/90 mb-6 max-w-md">
+                  Comediante venezolano en Santiago. 5 años creando conexiones
+                  genuinas a través del humor y la creatividad. Todo es conmigo,
+                  todo es directo.
                 </p>
 
                 {/* Contact Info */}
                 <div className="space-y-3">
+                  <div className="flex items-center space-x-3 text-white/80">
+                    <MapPin size={16} />
+                    <span>{data.location}</span>
+                  </div>
                   <a
-                    href={`tel:${data.phone}`}
-                    className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors"
+                    href={`https://wa.me/${data.whatsapp?.replace(/\D/g, "")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-3 text-white/80 hover:text-green-300 transition-colors"
                   >
-                    <Phone size={16} />
-                    <span>{data.phone}</span>
+                    <MessageCircle size={16} />
+                    <span>WhatsApp: {data.whatsapp}</span>
                   </a>
                   <a
                     href={`mailto:${data.email}`}
-                    className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors"
+                    className="flex items-center space-x-3 text-white/80 hover:text-white transition-colors"
                   >
                     <Mail size={16} />
                     <span>{data.email}</span>
-                  </a>
-                  <a
-                    href={`https://wa.me/${data.whatsapp}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-3 text-gray-300 hover:text-green-400 transition-colors"
-                  >
-                    <MessageCircle size={16} />
-                    <span>WhatsApp</span>
                   </a>
                 </div>
               </motion.div>
@@ -207,12 +210,7 @@ export default function Footer({ data, className = "" }: FooterProps) {
                     <li key={item.name}>
                       <button
                         onClick={() => handleNavigation(item)}
-                        className={`text-left transition-colors ${
-                          (item.href === "/" && pathname === "/") ||
-                          (item.name === "Inicio" && pathname === "/")
-                            ? "text-[var(--primary)]"
-                            : "text-gray-300 hover:text-white"
-                        }`}
+                        className="text-left transition-colors text-white/80 hover:text-white"
                       >
                         {item.name}
                       </button>
@@ -222,7 +220,7 @@ export default function Footer({ data, className = "" }: FooterProps) {
               </motion.div>
             </div>
 
-            {/* Support Links */}
+            {/* Services & Social */}
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -230,17 +228,13 @@ export default function Footer({ data, className = "" }: FooterProps) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <h4 className="text-lg font-semibold mb-6">Soporte</h4>
+                <h4 className="text-lg font-semibold mb-6">Servicios</h4>
                 <ul className="space-y-3">
                   {navigation.support.map((item) => (
                     <li key={item.name}>
                       <button
                         onClick={() => handleNavigation(item)}
-                        className={`text-left transition-colors ${
-                          item.href === "/about" && pathname === "/about"
-                            ? "text-[var(--primary)]"
-                            : "text-gray-300 hover:text-white"
-                        }`}
+                        className="text-left transition-colors text-white/80 hover:text-white"
                       >
                         {item.name}
                       </button>
@@ -250,10 +244,10 @@ export default function Footer({ data, className = "" }: FooterProps) {
 
                 {/* Social Links */}
                 <div className="mt-8">
-                  <h5 className="text-sm font-medium mb-4 text-gray-400">
-                    Síguenos
+                  <h5 className="text-sm font-medium mb-4 text-white/60">
+                    Sígueme
                   </h5>
-                  <div className="flex space-x-4">
+                  <div className="flex space-x-3">
                     {socialLinks.map((social) => {
                       if (!social.href) return null;
 
@@ -264,7 +258,8 @@ export default function Footer({ data, className = "" }: FooterProps) {
                           href={social.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-[var(--primary)] transition-colors"
+                          className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[var(--color-accent)]/50 transition-colors"
+                          title={social.name}
                         >
                           <Icon size={18} />
                         </a>
@@ -278,7 +273,7 @@ export default function Footer({ data, className = "" }: FooterProps) {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 py-8">
+        <div className="border-t border-white/20 py-8">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -286,41 +281,41 @@ export default function Footer({ data, className = "" }: FooterProps) {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="flex flex-col md:flex-row justify-between items-center"
           >
-            <div className="text-gray-400 text-sm mb-4 md:mb-0">
+            <div className="text-white/60 text-sm mb-4 md:mb-0">
               © {currentYear} {data.name}. Todos los derechos reservados.
             </div>
 
-            <div className="flex items-center space-x-6 text-gray-400 text-sm">
+            <div className="flex items-center space-x-6 text-white/60 text-sm">
               <button
                 className="hover:text-white transition-colors"
                 onClick={() =>
                   handleNavigation({
-                    name: "Términos",
+                    name: "Contacto",
                     href: isHomePage ? "#contact" : "/#contact",
                     type: isHomePage ? "scroll" : "link",
                   })
                 }
               >
-                Términos de Servicio
+                Términos de Uso
               </button>
               <button
                 className="hover:text-white transition-colors"
                 onClick={() =>
                   handleNavigation({
-                    name: "Privacidad",
+                    name: "Contacto",
                     href: isHomePage ? "#contact" : "/#contact",
                     type: isHomePage ? "scroll" : "link",
                   })
                 }
               >
-                Política de Privacidad
+                Privacidad
               </button>
             </div>
           </motion.div>
         </div>
 
-        {/* Made with love */}
-        <div className="border-t border-gray-800 py-6">
+        {/* Made with love - Actualizado para Gabriel */}
+        <div className="border-t border-white/20 py-6">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -328,21 +323,21 @@ export default function Footer({ data, className = "" }: FooterProps) {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="text-center"
           >
-            <div className="flex flex-col items-center justify-center space-y-2 text-gray-400 text-sm">
+            <div className="flex flex-col items-center justify-center space-y-2 text-white/60 text-sm">
               <div className="flex items-center space-x-2">
-                <span>Hecho con</span>
-                <Heart size={16} className="text-red-500" />
-                <span>en Santiago, Chile</span>
+                <span>Desarrollado con</span>
+                <Heart size={16} className="text-[var(--color-accent)]" />
+                <span>para conectar y hacer reír</span>
               </div>
               <div className="flex items-center space-x-2">
-                <span>Desarrollado por</span>
+                <span>Powered by</span>
                 <a
-                  href="https://miguelgilurbina.com"
+                  href="https://tuweben7dias.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[var(--primary)] hover:text-[var(--accent)] transition-colors font-medium"
+                  className="text-[var(--color-accent)] hover:text-white transition-colors font-medium"
                 >
-                  Miguel Gil Urbina
+                  Tu Web en 7 Días
                 </a>
               </div>
             </div>
@@ -350,7 +345,7 @@ export default function Footer({ data, className = "" }: FooterProps) {
         </div>
       </div>
 
-      {/* CTA Float Button - Navegación inteligente para WhatsApp */}
+      {/* WhatsApp Float Button */}
       <motion.div
         initial={{ opacity: 0, scale: 0 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -359,7 +354,10 @@ export default function Footer({ data, className = "" }: FooterProps) {
         className="fixed bottom-6 right-6 z-40"
       >
         <a
-          href={`https://wa.me/${data.whatsapp}?text=Hola! Me interesa obtener una página web profesional. Vi su sitio web y me gustaría conversar sobre mi proyecto.`}
+          href={`https://wa.me/${data.whatsapp?.replace(
+            /\D/g,
+            ""
+          )}?text=Hola Gabriel! Vi tu página web y me interesa hablar contigo sobre...`}
           target="_blank"
           rel="noopener noreferrer"
           className="w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group"

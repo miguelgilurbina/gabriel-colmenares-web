@@ -1,16 +1,17 @@
+// src/components/Header.tsx - Adaptado para Gabriel Colmenares
 "use client";
 
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { Menu, X, Phone, Mail } from "lucide-react";
-import { SiteData } from "@/lib/types";
+import { Menu, X, MessageCircle, Instagram } from "lucide-react";
+import { HeaderData } from "@/lib/types";
 
 interface HeaderProps {
-  data: SiteData["site"] & SiteData["contact"];
+  data: HeaderData;
   className?: string;
 }
 
-// Hook personalizado para manejar navegación inteligente
+// Hook para navegación inteligente (mantenido del original)
 const useSmartNavigation = () => {
   const pathname = usePathname();
   const router = useRouter();
@@ -18,13 +19,11 @@ const useSmartNavigation = () => {
 
   const navigateToSection = (href: string) => {
     if (isHomePage) {
-      // Si estamos en home, scroll directo
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      // Si estamos en otra página, ir a home y luego scroll
       router.push(`/${href}`);
     }
   };
@@ -55,7 +54,7 @@ export default function Header({ data, className = "" }: HeaderProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Configuración de navegación adaptativa
+  // Navegación adaptada para Gabriel
   const navigation = [
     {
       name: "Inicio",
@@ -63,9 +62,14 @@ export default function Header({ data, className = "" }: HeaderProps) {
       type: isHomePage ? "scroll" : "link",
     },
     {
-      name: "Sobre Nosotros",
-      href: "/about",
-      type: "link",
+      name: "Mi Historia",
+      href: isHomePage ? "#about" : "/#about",
+      type: isHomePage ? "scroll" : "link",
+    },
+    {
+      name: "Shows",
+      href: isHomePage ? "#shows" : "/#shows",
+      type: isHomePage ? "scroll" : "link",
     },
     {
       name: "Servicios",
@@ -73,13 +77,8 @@ export default function Header({ data, className = "" }: HeaderProps) {
       type: isHomePage ? "scroll" : "link",
     },
     {
-      name: "Proceso",
-      href: isHomePage ? "#process" : "/#process",
-      type: isHomePage ? "scroll" : "link",
-    },
-    {
-      name: "FAQ",
-      href: isHomePage ? "#faq" : "/#faq",
+      name: "Portfolio",
+      href: isHomePage ? "#portfolio" : "/#portfolio",
       type: isHomePage ? "scroll" : "link",
     },
     {
@@ -92,14 +91,11 @@ export default function Header({ data, className = "" }: HeaderProps) {
   const handleNavigation = (item: (typeof navigation)[0]) => {
     if (item.type === "link") {
       if (item.href.startsWith("/#")) {
-        // Para enlaces que van a home + sección
-        navigateToSection(item.href.substring(1)); // Quita el /
+        navigateToSection(item.href.substring(1));
       } else {
-        // Para páginas regulares
         navigateToPage(item.href);
       }
     } else {
-      // Para scroll interno
       navigateToSection(item.href);
     }
     setIsMenuOpen(false);
@@ -117,7 +113,7 @@ export default function Header({ data, className = "" }: HeaderProps) {
     if (isHomePage) {
       navigateToSection("#contact");
     } else {
-      navigateToSection("#contact"); // Esto llevará a home + contact
+      navigateToSection("#contact");
     }
   };
 
@@ -131,20 +127,21 @@ export default function Header({ data, className = "" }: HeaderProps) {
     >
       <div className="container-custom">
         <div className="flex justify-between items-center py-4">
-          {/* Logo - Navigation inteligente */}
+          {/* Logo Gabriel - Con logo real cuando esté listo */}
           <button
             onClick={handleLogoClick}
-            className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
+            className="flex items-center space-x-3 hover:opacity-80 transition-opacity"
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">7D</span>
+            {/* Placeholder para logo - cambiar cuando tengamos el real */}
+            <div className="w-10 h-10 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-lg">GC</span>
             </div>
             <div>
-              <h1 className="font-bold text-lg text-[var(--neutral-dark)]">
+              <h1 className="font-bold text-lg text-[var(--color-text)]">
                 {data.name}
               </h1>
-              <p className="text-xs text-[var(--neutral-medium)] hidden sm:block">
-                {data.tagline}
+              <p className="text-xs text-[var(--color-text-light)] hidden sm:block">
+                {data.business}
               </p>
             </div>
           </button>
@@ -155,43 +152,44 @@ export default function Header({ data, className = "" }: HeaderProps) {
               <button
                 key={item.name}
                 onClick={() => handleNavigation(item)}
-                className={`transition-colors duration-200 font-medium ${
-                  // Resaltar página actual
-                  (item.href === "/about" && pathname === "/about") ||
-                  (item.name === "Inicio" && pathname === "/")
-                    ? "text-[var(--primary)]"
-                    : "text-[var(--neutral-dark)] hover:text-[var(--primary)]"
-                }`}
+                className="transition-colors duration-200 font-medium text-[var(--color-text)] hover:text-[var(--color-primary)]"
               >
                 {item.name}
               </button>
             ))}
           </nav>
 
-          {/* Contact Info & CTA */}
+          {/* Contact Info & CTA - Adaptado para Gabriel */}
           <div className="hidden lg:flex items-center space-x-4">
             <div className="flex items-center space-x-3 text-sm">
               <a
-                href={`tel:${data.phone}`}
-                className="flex items-center space-x-1 text-[var(--neutral-medium)] hover:text-[var(--primary)] transition-colors"
+                href={`https://wa.me/${data.whatsapp.replace(/\D/g, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-1 text-[var(--color-text-light)] hover:text-green-600 transition-colors"
               >
-                <Phone size={16} />
-                <span>{data.phone}</span>
+                <MessageCircle size={16} />
+                <span>WhatsApp</span>
               </a>
               <div className="w-px h-4 bg-gray-300"></div>
               <a
-                href={`mailto:${data.email}`}
-                className="flex items-center space-x-1 text-[var(--neutral-medium)] hover:text-[var(--primary)] transition-colors"
+                href={`https://instagram.com/${data.instagram.replace(
+                  "@",
+                  ""
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-1 text-[var(--color-text-light)] hover:text-pink-600 transition-colors"
               >
-                <Mail size={16} />
-                <span className="hidden xl:inline">Email</span>
+                <Instagram size={16} />
+                <span className="hidden xl:inline">{data.instagram}</span>
               </a>
             </div>
             <button
               onClick={handleCtaClick}
-              className="btn-primary text-sm px-4 py-2"
+              className="bg-[var(--color-primary)] text-white px-4 py-2 rounded-lg font-medium hover:bg-[var(--color-primary)]/90 transition-colors text-sm"
             >
-              Solicitar Página
+              Trabajemos Juntos
             </button>
           </div>
 
@@ -212,12 +210,7 @@ export default function Header({ data, className = "" }: HeaderProps) {
                 <button
                   key={item.name}
                   onClick={() => handleNavigation(item)}
-                  className={`text-left transition-colors duration-200 font-medium py-2 ${
-                    (item.href === "/about" && pathname === "/about") ||
-                    (item.name === "Inicio" && pathname === "/")
-                      ? "text-[var(--primary)]"
-                      : "text-[var(--neutral-dark)] hover:text-[var(--primary)]"
-                  }`}
+                  className="text-left transition-colors duration-200 font-medium py-2 text-[var(--color-text)] hover:text-[var(--color-primary)]"
                 >
                   {item.name}
                 </button>
@@ -225,24 +218,31 @@ export default function Header({ data, className = "" }: HeaderProps) {
               <div className="pt-4 border-t border-gray-100">
                 <div className="flex flex-col space-y-3">
                   <a
-                    href={`tel:${data.phone}`}
-                    className="flex items-center space-x-2 text-[var(--neutral-medium)]"
+                    href={`https://wa.me/${data.whatsapp.replace(/\D/g, "")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 text-[var(--color-text-light)] hover:text-green-600"
                   >
-                    <Phone size={16} />
-                    <span>{data.phone}</span>
+                    <MessageCircle size={16} />
+                    <span>WhatsApp</span>
                   </a>
                   <a
-                    href={`mailto:${data.email}`}
-                    className="flex items-center space-x-2 text-[var(--neutral-medium)]"
+                    href={`https://instagram.com/${data.instagram.replace(
+                      "@",
+                      ""
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 text-[var(--color-text-light)] hover:text-pink-600"
                   >
-                    <Mail size={16} />
-                    <span>{data.email}</span>
+                    <Instagram size={16} />
+                    <span>{data.instagram}</span>
                   </a>
                   <button
                     onClick={handleCtaClick}
-                    className="btn-primary text-sm mt-4 self-start"
+                    className="bg-[var(--color-primary)] text-white px-4 py-3 rounded-lg font-medium mt-4 self-start"
                   >
-                    Solicitar Mi Página Web
+                    Trabajemos Juntos
                   </button>
                 </div>
               </div>
