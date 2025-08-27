@@ -104,14 +104,48 @@
     "spotify": "https://open.spotify.com/show/3Zax7N0vOGKMCp6en30ERf"
   },
   "shows": {
-    "title": "Próximos Shows",
-    "subtitle": "Conectando en vivo, una risa a la vez",
-    "featured_show": {
-      "title": "🎭 SHOW GRANDE DICIEMBRE 2024",
-      "description": "Mi evento más ambicioso del año. Una noche especial de comedia que no te puedes perder.",
-      "target_tickets": 180,
-      "cta_text": "Comprar Entradas",
-      "cta_link": "#tickets"
+    "title": "Shows Actuales",
+    "subtitle": "Dos propuestas únicas de comedia. Elige tu experiencia.",
+    "mainShows": [
+      {
+        "id": "+30k20",
+        "title": "+30K20",
+        "description": "El show que ha conquistado Santiago. Humor inteligente sobre la vida después de los 30 en pleno 2020s.",
+        "date": "Sábados 21:00",
+        "venue": "Teatro XYZ, Santiago",
+        "status": "Entradas disponibles",
+        "statusColor": "text-green-600",
+        "bgGradient": "from-gabriel-blue to-blue-600",
+        "ticketsUrl": "https://passline.com/eventos/gabriel-colmenares-30k20",
+        "showImage": "/images/30k20-flyer.jpg",
+        "features": [
+          "90 minutos de comedia",
+          "Material completamente nuevo",
+          "Experiencia interactiva"
+        ]
+      },
+      {
+        "id": "idilico",
+        "title": "IDÍLICO",
+        "description": "Mi nuevo unipersonal. Una mirada fresca y divertida a las expectativas vs realidad de la vida adulta.",
+        "date": "Viernes 20:30",
+        "venue": "Café Concert ABC, Santiago",
+        "status": "Preventa activa",
+        "statusColor": "text-gabriel-yellow",
+        "bgGradient": "from-gabriel-yellow to-yellow-500",
+        "ticketsUrl": "https://passline.com/eventos/gabriel-colmenares-idilico",
+        "showImage": "/images/idilico-flyer.jpg",
+        "features": [
+          "Estreno mundial",
+          "Show íntimo",
+          "Material exclusivo"
+        ]
+      }
+    ],
+    "eventInquiry": {
+      "title": "¿Eventos Corporativos o Privados?",
+      "description": "Adaptamos cualquiera de estos shows para tu evento especial. Shows corporativos, celebraciones privadas y eventos únicos.",
+      "whatsappMessage": "Hola Gabriel! Me interesa contratar uno de tus shows para un evento"
     }
   }
 }

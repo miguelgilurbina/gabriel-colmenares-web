@@ -65,16 +65,35 @@ export interface SiteData {
 
   // Próximos shows (placeholder para Passline)
   shows?: {
+  title: string;
+  subtitle: string;
+  mainShows: {
+    id: string;
     title: string;
-    subtitle: string;
-    featured_show?: {
-      title: string;
-      description: string;
-      target_tickets: number;
-      cta_text: string;
-      cta_link: string;
-    };
+    description: string;
+    date: string;
+    venue: string;
+    status: string;
+    statusColor: string;
+    bgGradient: string;
+    showImage?: string;
+    ticketsUrl: string;
+    features: string[];
+  }[];
+  eventInquiry: {
+    title: string;
+    description: string;
+    whatsappMessage: string;
   };
+  // Mantienes el featured_show por si lo usas en otro lado
+  featured_show?: {
+    title: string;
+    description: string;
+    target_tickets: number;
+    cta_text: string;
+    cta_link: string;
+  };
+};
 }
 
 // Interfaces específicas para cada componente actualizado

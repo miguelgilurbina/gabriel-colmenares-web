@@ -1,6 +1,6 @@
-// src/app/layout.tsx - Actualizado para Gabriel Colmenares
+// src/app/layout.tsx - Fixes para warnings Next.js
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,7 +10,7 @@ import "./globals.css";
 import templateData from "@/data/template.json";
 import { SiteData } from "@/lib/types";
 
-// Fonts actualizados para Gabriel (Montserrat como en el brief)
+// Fonts actualizados para Gabriel
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -22,8 +22,9 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
 });
 
-// Metadata específico para Gabriel
+// Metadata específico para Gabriel - con metadataBase
 export const metadata: Metadata = {
+  metadataBase: new URL("https://gabrielcolmenares.com"), // Fix para warning
   title: "Gabriel Colmenares - Comediante & Director Creativo",
   description:
     "Comediante venezolano en Santiago con 5 años de experiencia. Stand Up Comedy, Dirección Creativa, Presentación de Eventos. Todo es conmigo, todo es directo.",
@@ -62,11 +63,12 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-touch-icon.png",
   },
-  // Paleta Equilibrio Profesional
-  themeColor: "#2C3E50",
-  other: {
-    "msapplication-TileColor": "#2C3E50",
-  },
+};
+
+// Viewport separado según Next.js 14 requirements
+export const viewport: Viewport = {
+  themeColor: "#4A90E2", // Nuevo color del logo
+  colorScheme: "light",
 };
 
 // Type assertion para los datos importados
@@ -80,7 +82,7 @@ export default function RootLayout({
   return (
     <html lang="es" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${montserrat.variable} font-sans antialiased min-h-screen flex flex-col`}
+        className={`${inter.variable} ${montserrat.variable} font-sans antialiased min-h-screen flex flex-col bg-[var(--color-background)]`}
       >
         {/* Header con datos de Gabriel */}
         <Header
