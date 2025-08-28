@@ -1,29 +1,22 @@
-// src/components/About.tsx - Gabriel Colmenares
+// src/components/About.tsx - Gabriel's Story Notebook Style
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  Mic,
-  Star,
-  Users,
-  Award,
-  TrendingUp,
-  Heart,
-  MapPin,
-  Calendar,
-  Zap,
-  Target,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import Image from "next/image";
 import { AboutProps } from "@/lib/types";
 
 export default function About({ data, className = "" }: AboutProps) {
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.6,
-        staggerChildren: 0.2,
+        duration: 0.8,
+        staggerChildren: 0.3,
       },
     },
   };
@@ -33,311 +26,302 @@ export default function About({ data, className = "" }: AboutProps) {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-      },
+      transition: { duration: 0.6 },
     },
   };
 
+  // Testimoniales estructurados
+  const testimonials = [
+    {
+      name: "Daniela Mujica",
+      role: "Project Manager",
+      company: "The Culture Makers",
+      logo: "/images/logos/culture-makers.jpg",
+      text: "Gabriel se prepara de manera personalizada para cada evento. Hemos colaborado en distintas ocasiones y siempre ha sido una grata experiencia. El público disfruta mucho de su capacidad de improvisar y siempre genera muy buenos comentarios.",
+    },
+    {
+      name: "Aily Linares",
+      role: "Administradora",
+      company: "Izarra Publicidad",
+      logo: "/images/logos/izarra.jpg",
+      text: "Trabajar con Gabriel ha traído reconocimiento por nuevo público a la marca, ventas e interacción mediante redes sociales. 10/10 el trabajo en conjunto, siempre con responsabilidad, eficiencia y respeto.",
+    },
+    {
+      name: "Gregory Ortiz",
+      role: "Encargado y Docente",
+      company: "Flow Barber Studio",
+      logo: "/images/logos/flow-barbers.jpg",
+      text: "Su participación fue realmente favorecedora: además de ser talentoso, aportó ideas frescas y mostró gran proactividad. Su buena vibra hizo que el proceso creativo fuera mucho más enriquecedor.",
+    },
+    {
+      name: "Tony Lara",
+      role: "Dueño",
+      company: "Laville",
+      logo: "/images/logos/laville.jpg",
+      text: "Es muy grato compartir ideas y trabajar en conjunto a un artista con tanta creatividad y compromiso con la marca.",
+    },
+  ];
+
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentTestimonial(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
+  };
+
   return (
-    <section
-      id="about"
-      className={`py-20 bg-gradient-to-b from-[var(--color-secondary)] to-white ${className}`}
+    <div
+      className={`min-h-screen bg-cover bg-center relative ${className}`}
+      style={{
+        backgroundImage: "url('/images/notebook-background.jpg')",
+        backgroundAttachment: "fixed",
+      }}
     >
-      <div className="container-custom">
+      {/* Overlay sutil para legibilidad */}
+      <div className="absolute inset-0 bg-white/70 backdrop-blur-[0.5px]"></div>
+
+      <div className="relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          animate="visible"
+          className="container mx-auto px-6 lg:px-8 py-20"
         >
-          {/* Header */}
+          {/* Header - Título del cuaderno */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-text)] mb-6">
-              {data.title}
-            </h2>
-            <p className="text-xl text-[var(--color-accent)] font-semibold mb-4 max-w-3xl mx-auto">
-              {data.subtitle}
-            </p>
+            <div className="inline-block transform -rotate-1 bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg border-l-4 border-gabriel-blue">
+              <h1 className="heading-1 text-gabriel-dark mb-4 handwritten">
+                La Historia de Gabriel
+              </h1>
+              <p className="text-gabriel-gray italic">
+                *Apuntes desde Santiago, con amor y risas*
+              </p>
+            </div>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center mb-16">
-            {/* Left Column - Image */}
-            <motion.div variants={itemVariants} className="relative">
-              <div className="relative max-w-md mx-auto">
-                {/* Image Container */}
-                <div className="aspect-square relative overflow-hidden rounded-2xl bg-gradient-to-br from-[var(--color-primary)]/20 to-[var(--color-accent)]/20 border border-[var(--color-primary)]/10">
-                  {data.image ? (
-                    <img
-                      src={data.image}
-                      alt="Gabriel Colmenares"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center p-8">
-                        <div className="w-24 h-24 bg-[var(--color-primary)]/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                          <Heart
-                            size={48}
-                            className="text-[var(--color-primary)]"
-                          />
-                        </div>
-                        <p className="text-[var(--color-text-light)] text-sm">
-                          Foto de Gabriel
-                          <br />
-                          próximamente
-                        </p>
-                      </div>
-                    </div>
-                  )}
+          {/* Narrative Sections - Como páginas de cuaderno */}
+          <div className="max-w-4xl mx-auto space-y-16">
+            {/* Sección 1: El Comediante */}
+            <motion.div
+              variants={itemVariants}
+              className="grid lg:grid-cols-2 gap-8 items-center"
+            >
+              <div className="order-2 lg:order-1">
+                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg transform rotate-1 border-l-4 border-gabriel-yellow">
+                  <h2 className="text-2xl font-bold text-gabriel-dark mb-4 handwritten">
+                    📝 Capítulo 1: De Caracas a Santiago
+                  </h2>
+                  <div className="notebook-lines p-4 bg-white/50 rounded-lg">
+                    <p className="text-gabriel-gray leading-relaxed mb-4">
+                      Llegué a Santiago con una maleta llena de chistes
+                      venezolanos y la esperanza de hacer reír a chilenos. 5
+                      años después, he aprendido que el humor universal existe,
+                      pero la conexión genuina es lo que realmente importa.
+                    </p>
+                    <p className="text-gabriel-gray leading-relaxed">
+                      Desde telonear a Luis Slimming y Doctor Escalona, hasta
+                      crear mi productora Alien Caribeño, cada show ha sido una
+                      oportunidad de conectar sin intermediarios.{" "}
+                      <strong>Todo es conmigo, todo es directo.</strong>
+                    </p>
+                  </div>
                 </div>
+              </div>
 
-                {/* Floating Stats */}
-                <motion.div
-                  className="absolute -top-4 -right-4 bg-white p-3 rounded-lg shadow-lg border border-gray-100"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.8, duration: 0.6 }}
-                >
-                  <div className="flex items-center space-x-2">
-                    <MapPin size={16} className="text-[var(--color-accent)]" />
-                    <span className="text-sm font-medium text-[var(--color-text)]">
-                      Santiago, Chile
-                    </span>
+              <div className="order-1 lg:order-2">
+                <div className="relative">
+                  <Image
+                    src="/images/gabriel-stage.jpg"
+                    alt="Gabriel en escena"
+                    width={500}
+                    height={400}
+                    className="rounded-xl shadow-lg transform -rotate-2 hover:rotate-0 transition-transform duration-300"
+                  />
+                  <div className="absolute -bottom-4 -right-4 bg-gabriel-yellow text-gabriel-dark px-3 py-1 rounded-full text-sm font-medium transform rotate-12">
+                    En mi elemento 🎤
                   </div>
-                </motion.div>
-
-                <motion.div
-                  className="absolute -bottom-4 -left-4 bg-[var(--color-accent)] p-3 rounded-lg shadow-lg text-white"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1, duration: 0.6 }}
-                >
-                  <div className="text-center">
-                    <div className="text-lg font-bold">5</div>
-                    <div className="text-xs opacity-90">años</div>
-                  </div>
-                </motion.div>
+                </div>
               </div>
             </motion.div>
 
-            {/* Right Column - Story */}
-            <motion.div variants={itemVariants}>
-              <div className="prose prose-lg max-w-none">
-                <p className="text-[var(--color-text-light)] leading-relaxed mb-6">
-                  {data.description}
-                </p>
+            {/* Sección 2: El Improvisador */}
+            <motion.div
+              variants={itemVariants}
+              className="grid lg:grid-cols-2 gap-8 items-center"
+            >
+              <div className="order-1">
+                <div className="relative">
+                  <Image
+                    src="/images/impro-3.jpg"
+                    alt="Gabriel improvisando"
+                    width={500}
+                    height={400}
+                    className="rounded-xl shadow-lg transform rotate-2 hover:rotate-0 transition-transform duration-300"
+                  />
+                  <div className="absolute -bottom-4 -left-4 bg-gabriel-blue text-white px-3 py-1 rounded-full text-sm font-medium transform -rotate-12">
+                    Crowdwork master ⚡
+                  </div>
+                </div>
+              </div>
 
-                <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-100 shadow-sm">
-                  <h3 className="text-xl font-bold text-[var(--color-text)] mb-4 flex items-center">
-                    <Target
-                      size={24}
-                      className="text-[var(--color-accent)] mr-3"
-                    />
-                    Por qué hago esto
-                  </h3>
-                  <p className="text-[var(--color-text-light)] italic">
-                    La conexión genuina con las personas, hacer reír incluso en
-                    crisis, vivir de la creatividad sin perder autenticidad.
+              <div className="order-2">
+                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg transform -rotate-1 border-l-4 border-gabriel-dark">
+                  <h2 className="text-2xl font-bold text-gabriel-dark mb-4 handwritten">
+                    🎭 Capítulo 2: La Magia de la Improvisación
+                  </h2>
+                  <div className="notebook-lines p-4 bg-white/50 rounded-lg">
+                    <p className="text-gabriel-gray leading-relaxed mb-4">
+                      Los 4 sold outs consecutivos en Mix Chatarritas no fueron
+                      casualidad. Cada show de crowdwork es único porque la
+                      audiencia es única. No hay dos noches iguales.
+                    </p>
+                    <p className="text-gabriel-gray leading-relaxed">
+                      La improvisación me ha enseñado a leer la sala, adaptarme
+                      al momento y crear conexiones auténticas. Es donde mi
+                      experiencia venezolana se encuentra con la realidad
+                      chilena, y surge algo completamente nuevo.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Sección 3: El Creativo */}
+            <motion.div variants={itemVariants} className="text-center">
+              <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg transform rotate-0 border-l-4 border-gabriel-yellow max-w-3xl mx-auto">
+                <h2 className="text-2xl font-bold text-gabriel-dark mb-4 handwritten">
+                  🎬 Capítulo 3: Más Allá del Micrófono
+                </h2>
+                <div className="notebook-lines p-4 bg-white/50 rounded-lg">
+                  <p className="text-gabriel-gray leading-relaxed mb-4">
+                    La comedia abrió puertas a la dirección creativa, el
+                    podcasting y la creación de contenido. Cada proyecto es una
+                    oportunidad de contar historias desde ángulos diferentes.
+                  </p>
+                  <p className="text-gabriel-gray leading-relaxed">
+                    Alien Caribeño no es solo una productora, es mi forma de
+                    mantener esa conexión directa en cada proyecto, sea un
+                    videoclip, un evento corporativo o una colaboración
+                    creativa.
                   </p>
                 </div>
               </div>
             </motion.div>
           </div>
 
-          {/* Achievements Grid */}
-          <motion.div variants={itemVariants} className="mb-16">
+          {/* Testimonials Section - Como cartas en el cuaderno */}
+          <motion.div variants={itemVariants} className="mt-20">
             <div className="text-center mb-12">
-              <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-text)] mb-4">
-                Logros que Definen mi Carrera
-              </h3>
-              <p className="text-[var(--color-text-light)] max-w-2xl mx-auto">
-                Cada hito representa crecimiento, aprendizaje y conexiones
-                auténticas
-              </p>
+              <div className="inline-block bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg transform -rotate-1">
+                <h2 className="text-2xl font-bold text-gabriel-dark handwritten">
+                  💌 Cartas de Colaboradores
+                </h2>
+              </div>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {data.achievements.map((achievement, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="bg-white rounded-xl p-6 border border-gray-200 hover:border-[var(--color-primary)]/30 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
-                >
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-[var(--color-primary)]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      {index === 0 && (
-                        <Star
-                          size={24}
-                          className="text-[var(--color-accent)]"
+            <div className="max-w-4xl mx-auto">
+              <div className="relative">
+                {/* Testimonial Card */}
+                <div className="bg-white/95 backdrop-blur-sm rounded-xl p-8 shadow-xl border border-gray-200 min-h-[300px] flex flex-col justify-between">
+                  {/* Header */}
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mr-4">
+                      {testimonials[currentTestimonial].logo ? (
+                        <Image
+                          src={testimonials[currentTestimonial].logo}
+                          alt={`${testimonials[currentTestimonial].company} logo`}
+                          width={70}
+                          height={70}
+                          className="object-contain"
                         />
-                      )}
-                      {index === 1 && (
-                        <Users
-                          size={24}
-                          className="text-[var(--color-primary)]"
-                        />
-                      )}
-                      {index === 2 && (
-                        <Award
-                          size={24}
-                          className="text-[var(--color-accent)]"
-                        />
-                      )}
-                      {index === 3 && (
-                        <TrendingUp
-                          size={24}
-                          className="text-[var(--color-primary)]"
-                        />
-                      )}
-                      {index === 4 && (
-                        <Mic size={24} className="text-[var(--color-accent)]" />
+                      ) : (
+                        <div className="w-8 h-8 bg-gabriel-blue rounded-full flex items-center justify-center">
+                          <span className="text-white text-sm font-bold">
+                            {testimonials[currentTestimonial].company.charAt(0)}
+                          </span>
+                        </div>
                       )}
                     </div>
+
                     <div>
-                      <p className="text-[var(--color-text)] font-medium leading-relaxed">
-                        {achievement}
+                      <h3 className="text-lg font-bold text-gabriel-dark">
+                        {testimonials[currentTestimonial].name}
+                      </h3>
+                      <p className="text-gabriel-gray text-sm">
+                        {testimonials[currentTestimonial].role} •{" "}
+                        {testimonials[currentTestimonial].company}
                       </p>
                     </div>
                   </div>
-                </motion.div>
-              ))}
+
+                  {/* Quote */}
+                  <div className="flex-grow flex items-center">
+                    <Quote className="text-gabriel-blue/20 w-8 h-8 mr-4 flex-shrink-0" />
+                    <p className="text-gabriel-gray leading-relaxed italic">
+                      {testimonials[currentTestimonial].text}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Navigation */}
+                <div className="flex justify-between items-center mt-6">
+                  <button
+                    onClick={prevTestimonial}
+                    className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-gabriel-blue hover:text-white transition-colors"
+                  >
+                    <ChevronLeft size={20} />
+                  </button>
+
+                  <div className="flex space-x-2">
+                    {testimonials.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentTestimonial(index)}
+                        className={`w-3 h-3 rounded-full transition-colors ${
+                          index === currentTestimonial
+                            ? "bg-gabriel-blue"
+                            : "bg-gray-300"
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={nextTestimonial}
+                    className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-gabriel-blue hover:text-white transition-colors"
+                  >
+                    <ChevronRight size={20} />
+                  </button>
+                </div>
+              </div>
             </div>
           </motion.div>
 
-          {/* Journey Timeline */}
-          <motion.div variants={itemVariants} className="mb-16">
-            <div className="text-center mb-12">
-              <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-text)] mb-4">
-                Mi Journey Creativo
+          {/* CTA Final */}
+          <motion.div variants={itemVariants} className="text-center mt-16">
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg transform rotate-1 max-w-2xl mx-auto border-l-4 border-gabriel-yellow">
+              <h3 className="text-xl font-bold text-gabriel-dark mb-4 handwritten">
+                ¿Listo para crear algo juntos?
               </h3>
-              <p className="text-[var(--color-text-light)] max-w-2xl mx-auto">
-                De asistente de producción a crear mi propia productora
+              <p className="text-gabriel-gray mb-6">
+                Cada proyecto es una nueva página en blanco. Hablemos de cómo
+                podemos llenar esa página con ideas increíbles.
               </p>
-            </div>
-
-            <div className="max-w-4xl mx-auto relative">
-              {/* Timeline line */}
-              <div className="absolute left-1/2 transform -translate-x-0.5 w-1 h-full bg-gradient-to-b from-[var(--color-primary)] to-[var(--color-accent)]"></div>
-
-              <div className="space-y-12">
-                {/* Teatro Municipal */}
-                <div className="relative">
-                  <div className="flex items-center justify-center">
-                    <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-lg max-w-md mx-8 relative">
-                      <div className="absolute -left-4 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-[var(--color-primary)] rounded-full flex items-center justify-center">
-                        <Users size={16} className="text-white" />
-                      </div>
-                      <h4 className="text-lg font-bold text-[var(--color-text)] mb-2">
-                        Teatro Municipal Las Condes
-                      </h4>
-                      <p className="text-[var(--color-text-light)] text-sm">
-                        Asistente de producción - Aprendiendo el oficio desde
-                        adentro
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Primeros Shows */}
-                <div className="relative">
-                  <div className="flex items-center justify-center">
-                    <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-lg max-w-md mx-8 relative">
-                      <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-[var(--color-accent)] rounded-full flex items-center justify-center">
-                        <Mic size={16} className="text-white" />
-                      </div>
-                      <h4 className="text-lg font-bold text-[var(--color-text)] mb-2">
-                        De putero adaptado a 100 personas
-                      </h4>
-                      <p className="text-[var(--color-text-light)] text-sm">
-                        La transformación que definió mi profesionalismo
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Alien Caribeño */}
-                <div className="relative">
-                  <div className="flex items-center justify-center">
-                    <div className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl p-6 text-white max-w-md mx-8 relative shadow-xl">
-                      <div className="absolute -left-4 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                        <Star
-                          size={16}
-                          className="text-[var(--color-primary)]"
-                        />
-                      </div>
-                      <h4 className="text-lg font-bold mb-2">Alien Caribeño</h4>
-                      <p className="text-white/90 text-sm">
-                        Mi productora propia - Independencia creativa total
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Value Proposition */}
-          <motion.div variants={itemVariants} className="text-center">
-            <div className="bg-gradient-to-r from-[var(--color-primary)]/5 to-[var(--color-accent)]/5 rounded-2xl p-8 lg:p-12 border border-[var(--color-primary)]/10 max-w-4xl mx-auto">
-              <div className="mb-6">
-                <div className="w-16 h-16 bg-[var(--color-accent)]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Heart size={32} className="text-[var(--color-accent)]" />
-                </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-text)] mb-4">
-                  Mi Promesa
-                </h3>
-                <p className="text-xl text-[var(--color-text-light)] mb-8 max-w-2xl mx-auto">
-                  {data.value_proposition}
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-6 mb-8">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-[var(--color-primary)] mb-2">
-                    Sin intermediarios
-                  </div>
-                  <p className="text-[var(--color-text-light)] text-sm">
-                    Todo pasa por mí directamente
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-[var(--color-accent)] mb-2">
-                    100% auténtico
-                  </div>
-                  <p className="text-[var(--color-text-light)] text-sm">
-                    Creatividad genuina siempre
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-[var(--color-primary)] mb-2">
-                    Adaptable
-                  </div>
-                  <p className="text-[var(--color-text-light)] text-sm">
-                    Sin perder mi esencia
-                  </p>
-                </div>
-              </div>
-
-              <button
-                onClick={() => {
-                  const element = document.querySelector("#contact");
-                  if (element) {
-                    element.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
-                className="bg-[var(--color-primary)] text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-[var(--color-primary)]/90 transition-colors flex items-center mx-auto group"
+              <a
+                href="https://wa.me/56932323094?text=Hola Gabriel! Leí tu historia y me encantaría trabajar contigo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary btn-lg group"
               >
-                Trabajemos juntos
-                <Zap
-                  size={20}
-                  className="ml-2 group-hover:scale-110 transition-transform"
-                />
-              </button>
+                Escribamos juntos la próxima página
+              </a>
             </div>
           </motion.div>
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 }

@@ -1,17 +1,8 @@
-// src/components/Footer.tsx - Adaptado para Gabriel Colmenares
+// src/components/Footer.tsx - Minimal Footer
 "use client";
 
-import { motion } from "framer-motion";
 import { useRouter, usePathname } from "next/navigation";
-import {
-  Heart,
-  Mail,
-  MessageCircle,
-  Instagram,
-  Youtube,
-  Headphones,
-  MapPin,
-} from "lucide-react";
+import { MessageCircle, Instagram, Youtube, Headphones } from "lucide-react";
 import { FooterData } from "@/lib/types";
 
 interface FooterProps {
@@ -19,7 +10,6 @@ interface FooterProps {
   className?: string;
 }
 
-// Hook reutilizable para navegación inteligente
 const useSmartNavigation = () => {
   const pathname = usePathname();
   const router = useRouter();
@@ -44,7 +34,6 @@ const useSmartNavigation = () => {
     isHomePage,
     navigateToSection,
     navigateToPage,
-    pathname,
   };
 };
 
@@ -53,43 +42,50 @@ export default function Footer({ data, className = "" }: FooterProps) {
   const { isHomePage, navigateToSection, navigateToPage } =
     useSmartNavigation();
 
-  // Navegación adaptativa para Gabriel
-  const navigation = {
-    main: [
-      {
-        name: "Inicio",
-        href: isHomePage ? "#hero" : "/",
-        type: isHomePage ? "scroll" : "link",
-      },
-      {
-        name: "Mi Historia",
-        href: isHomePage ? "#about" : "/#about",
-        type: isHomePage ? "scroll" : "link",
-      },
-      {
-        name: "Shows",
-        href: isHomePage ? "#shows" : "/#shows",
-        type: isHomePage ? "scroll" : "link",
-      },
-    ],
-    support: [
-      {
-        name: "Servicios",
-        href: isHomePage ? "#services" : "/#services",
-        type: isHomePage ? "scroll" : "link",
-      },
-      {
-        name: "Portfolio",
-        href: isHomePage ? "#portfolio" : "/#portfolio",
-        type: isHomePage ? "scroll" : "link",
-      },
-      {
-        name: "Contacto",
-        href: isHomePage ? "#contact" : "/#contact",
-        type: isHomePage ? "scroll" : "link",
-      },
-    ],
-  };
+  const navigation = [
+    {
+      name: "Inicio",
+      href: isHomePage ? "#hero" : "/",
+      type: isHomePage ? "scroll" : "link",
+    },
+    {
+      name: "Shows",
+      href: isHomePage ? "#shows" : "/#shows",
+      type: isHomePage ? "scroll" : "link",
+    },
+    {
+      name: "Sobre Gabo",
+      href: "/about",
+      type: "link",
+    },
+  ];
+
+  const socialLinks = [
+    {
+      name: "WhatsApp",
+      href: `https://wa.me/${data.whatsapp?.replace(/\D/g, "")}`,
+      icon: MessageCircle,
+      hoverColor: "hover:text-green-500",
+    },
+    {
+      name: "Instagram",
+      href: `https://instagram.com/${data.instagram?.replace("@", "")}`,
+      icon: Instagram,
+      hoverColor: "hover:text-pink-500",
+    },
+    {
+      name: "YouTube",
+      href: data.youtube,
+      icon: Youtube,
+      hoverColor: "hover:text-red-500",
+    },
+    {
+      name: "Spotify",
+      href: data.spotify,
+      icon: Headphones,
+      hoverColor: "hover:text-green-600",
+    },
+  ];
 
   const handleNavigation = (item: {
     name: string;
@@ -107,257 +103,73 @@ export default function Footer({ data, className = "" }: FooterProps) {
     }
   };
 
-  const handleLogoClick = () => {
-    if (isHomePage) {
-      navigateToSection("#hero");
-    } else {
-      navigateToPage("/");
-    }
-  };
-
-  // Social links adaptados para Gabriel
-  const socialLinks = [
-    {
-      name: "Instagram",
-      href: `https://instagram.com/${
-        data.instagram?.replace("@", "") || "uncolmenares"
-      }`,
-      icon: Instagram,
-    },
-    {
-      name: "YouTube",
-      href: data.youtube,
-      icon: Youtube,
-    },
-    {
-      name: "Spotify",
-      href: data.spotify,
-      icon: Headphones,
-    },
-  ];
-
   return (
-    <footer className={`bg-[var(--color-primary)] text-white ${className}`}>
-      <div className="container-custom">
-        {/* Main Footer Content */}
-        <div className="py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Brand Section - Gabriel */}
-            <div className="lg:col-span-2">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                {/* Logo clickeable */}
+    <footer className={`bg-white border-t border-gray-200 ${className}`}>
+      <div className="container mx-auto px-6 lg:px-8">
+        <div className="py-12">
+          {/* Main Content */}
+          <div className="flex flex-col items-center text-center space-y-8">
+            {/* Navigation */}
+            <nav className="flex flex-wrap justify-center gap-8">
+              {navigation.map((item) => (
                 <button
-                  onClick={handleLogoClick}
-                  className="flex items-center space-x-3 mb-6 hover:opacity-80 transition-opacity"
+                  key={item.name}
+                  onClick={() => handleNavigation(item)}
+                  className="text-gabriel-gray hover:text-gabriel-blue transition-colors font-medium"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-br from-[var(--color-accent)] to-white/20 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold text-xl">GC</span>
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold">{data.name}</h3>
-                    <p className="text-white/80 text-sm">{data.business}</p>
-                  </div>
+                  {item.name}
                 </button>
+              ))}
+            </nav>
 
-                <p className="text-white/90 mb-6 max-w-md">
-                  Comediante venezolano en Santiago. 5 años creando conexiones
-                  genuinas a través del humor y la creatividad. Todo es conmigo,
-                  todo es directo.
-                </p>
-
-                {/* Contact Info */}
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-3 text-white/80">
-                    <MapPin size={16} />
-                    <span>{data.location}</span>
-                  </div>
+            {/* Social Links */}
+            <div className="flex space-x-6">
+              {socialLinks.map((social) => {
+                if (!social.href) return null;
+                const Icon = social.icon;
+                return (
                   <a
-                    href={`https://wa.me/${data.whatsapp?.replace(/\D/g, "")}`}
+                    key={social.name}
+                    href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-3 text-white/80 hover:text-green-300 transition-colors"
+                    className={`w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-gabriel-gray ${social.hoverColor} hover:bg-gray-50 transition-all`}
+                    title={social.name}
                   >
-                    <MessageCircle size={16} />
-                    <span>WhatsApp: {data.whatsapp}</span>
+                    <Icon size={20} />
                   </a>
-                  <a
-                    href={`mailto:${data.email}`}
-                    className="flex items-center space-x-3 text-white/80 hover:text-white transition-colors"
-                  >
-                    <Mail size={16} />
-                    <span>{data.email}</span>
-                  </a>
-                </div>
-              </motion.div>
+                );
+              })}
             </div>
 
-            {/* Navigation Links */}
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <h4 className="text-lg font-semibold mb-6">Navegación</h4>
-                <ul className="space-y-3">
-                  {navigation.main.map((item) => (
-                    <li key={item.name}>
-                      <button
-                        onClick={() => handleNavigation(item)}
-                        className="text-left transition-colors text-white/80 hover:text-white"
-                      >
-                        {item.name}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            </div>
-
-            {/* Services & Social */}
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                <h4 className="text-lg font-semibold mb-6">Servicios</h4>
-                <ul className="space-y-3">
-                  {navigation.support.map((item) => (
-                    <li key={item.name}>
-                      <button
-                        onClick={() => handleNavigation(item)}
-                        className="text-left transition-colors text-white/80 hover:text-white"
-                      >
-                        {item.name}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Social Links */}
-                <div className="mt-8">
-                  <h5 className="text-sm font-medium mb-4 text-white/60">
-                    Sígueme
-                  </h5>
-                  <div className="flex space-x-3">
-                    {socialLinks.map((social) => {
-                      if (!social.href) return null;
-
-                      const Icon = social.icon;
-                      return (
-                        <a
-                          key={social.name}
-                          href={social.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[var(--color-accent)]/50 transition-colors"
-                          title={social.name}
-                        >
-                          <Icon size={18} />
-                        </a>
-                      );
-                    })}
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="border-t border-white/20 py-8">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex flex-col md:flex-row justify-between items-center"
-          >
-            <div className="text-white/60 text-sm mb-4 md:mb-0">
-              © {currentYear} {data.name}. Todos los derechos reservados.
-            </div>
-
-            <div className="flex items-center space-x-6 text-white/60 text-sm">
-              <button
-                className="hover:text-white transition-colors"
-                onClick={() =>
-                  handleNavigation({
-                    name: "Contacto",
-                    href: isHomePage ? "#contact" : "/#contact",
-                    type: isHomePage ? "scroll" : "link",
-                  })
-                }
-              >
-                Términos de Uso
-              </button>
-              <button
-                className="hover:text-white transition-colors"
-                onClick={() =>
-                  handleNavigation({
-                    name: "Contacto",
-                    href: isHomePage ? "#contact" : "/#contact",
-                    type: isHomePage ? "scroll" : "link",
-                  })
-                }
-              >
-                Privacidad
-              </button>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Made with love - Actualizado para Gabriel */}
-        <div className="border-t border-white/20 py-6">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="text-center"
-          >
-            <div className="flex flex-col items-center justify-center space-y-2 text-white/60 text-sm">
-              <div className="flex items-center space-x-2">
-                <span>Desarrollado con</span>
-                <Heart size={16} className="text-[var(--color-accent)]" />
-                <span>para conectar y hacer reír</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span>Powered by</span>
+            {/* Copyright & Credits */}
+            <div className="space-y-2 text-sm text-gabriel-gray">
+              <p>
+                © {currentYear} {data.name} • {data.location}
+              </p>
+              <p>
+                Desarrollado por{" "}
                 <a
                   href="https://tuweben7dias.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[var(--color-accent)] hover:text-white transition-colors font-medium"
+                  className="text-gabriel-blue hover:text-blue-600 transition-colors font-medium"
                 >
-                  Tu Web en 7 Días
+                  tuweben7dias.com
                 </a>
-              </div>
+              </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       {/* WhatsApp Float Button */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 1 }}
-        className="fixed bottom-6 right-6 z-40"
-      >
+      <div className="fixed bottom-6 right-6 z-50">
         <a
           href={`https://wa.me/${data.whatsapp?.replace(
             /\D/g,
             ""
-          )}?text=Hola Gabriel! Vi tu página web y me interesa hablar contigo sobre...`}
+          )}?text=Hola Gabriel! Vi tu página web y me interesa hablar contigo`}
           target="_blank"
           rel="noopener noreferrer"
           className="w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group"
@@ -367,7 +179,7 @@ export default function Footer({ data, className = "" }: FooterProps) {
             className="text-white group-hover:scale-110 transition-transform"
           />
         </a>
-      </motion.div>
+      </div>
     </footer>
   );
 }

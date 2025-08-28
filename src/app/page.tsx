@@ -29,8 +29,6 @@ export default function HomePage() {
         <Shows data={siteData.shows} />
         {/* Services Section - Sus servicios creativos */}
         <Services data={siteData.services} />
-        {/* Portfolio Section - Casos de éxito */}
-        <Portfolio data={siteData.portfolio} />
         {/* Contact Section - Contacto directo */}
         <Contact data={siteData.contact} />
       </div>

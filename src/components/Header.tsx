@@ -106,13 +106,13 @@ export default function Header({ data, className = "" }: HeaderProps) {
             onClick={handleLogoClick}
             className="flex items-center hover:opacity-80 transition-opacity"
           >
-            <div className="relative w-32 h-32 md:w-18 md:h-18  sm:w-16 sm:h-16">
+            <div className="relative w-18 h-18 md:w-16 md:h-16  sm:w-14 sm:h-14">
               <Image
                 src="/images/gabriel-logo.png" // Aquí va tu logo real
                 alt="Gabriel Colmenares Logo"
                 fill
                 className="object-contain"
-                sizes="72px"
+                sizes="96 px"
               />
             </div>
           </button>
