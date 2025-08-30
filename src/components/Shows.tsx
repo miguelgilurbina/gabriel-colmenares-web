@@ -1,18 +1,36 @@
-// src/components/Shows.tsx - Clean Redesign
+// src/components/Shows.tsx - With Services Integration
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Calendar,
   MapPin,
   ArrowRight,
   Ticket,
   ExternalLink,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import Image from "next/image";
-import { ShowsProps } from "@/lib/types";
+import { ShowsProps, ServicesProps } from "@/lib/types";
+import Services from "./Services";
 
-export default function Shows({ data, className = "" }: ShowsProps) {
+interface ShowsWithServicesProps extends ShowsProps {
+  servicesData?: ServicesProps["data"];
+}
+
+export default function Shows({
+  data,
+  servicesData = [],
+  className = "",
+}: ShowsWithServicesProps) {
+  const [showServices, setShowServices] = useState(false);
+
+  const toggleServices = () => {
+    setShowServices(!showServices);
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -46,7 +64,7 @@ export default function Shows({ data, className = "" }: ShowsProps) {
         date: "Sábados 21:00",
         venue: "Teatro XYZ, Santiago",
         ticketsUrl: "https://passline.com/eventos/gabriel-colmenares-30k20",
-        showImage: "/images/30k20-flyer.jpg, // Imagen del show en acción",
+        showImage: "/images/show-30k20.jpg", // Imagen del show en acción
       },
       {
         id: "idilico",
@@ -56,7 +74,7 @@ export default function Shows({ data, className = "" }: ShowsProps) {
         date: "Viernes 20:30",
         venue: "Café Concert ABC, Santiago",
         ticketsUrl: "https://passline.com/eventos/gabriel-colmenares-idilico",
-        showImage: "/images/idilico-flyer.jpg", // Imagen del show en acción
+        showImage: "/images/show-idilico.jpg", // Imagen del show en acción
       },
     ],
     eventInquiry: {
@@ -71,7 +89,7 @@ export default function Shows({ data, className = "" }: ShowsProps) {
   const mainShows = showsData.mainShows;
 
   return (
-    <section id="shows" className={`py-20 bg-gabriel-light ${className}`}>
+    <section id="shows" className={`py-20  ${className}`}>
       <div className="container mx-auto px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
@@ -81,31 +99,30 @@ export default function Shows({ data, className = "" }: ShowsProps) {
         >
           {/* Header */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="heading-2 text-gabriel-dark mb-6">
+            <h2 className="heading-2 text-gabriel-dark mb-6 section-title">
               {showsData.title}
             </h2>
-            <p className="text-large max-w-2xl mx-auto">{showsData.subtitle}</p>
           </motion.div>
 
           {/* Main Shows - Horizontal Cards */}
           <div className="space-y-8 mb-16">
-            {mainShows.map((show, index) => (
+            {mainShows.map((show) => (
               <motion.div
                 key={show.id}
                 variants={itemVariants}
                 className="group"
               >
                 <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100">
-                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-0">
+                  <div className="grid lg:grid-cols-5 gap-0">
                     {/* Image Section - 2/5 del ancho */}
-                    <div className="col-span-1 lg:col-span-2 relative">
-                      <div className="aspect-[3/4] relative bg-gray-100">
+                    <div className="lg:col-span-2 relative">
+                      <div className="aspect-[4/3] lg:aspect-[3/4] relative bg-gray-100">
                         {show.showImage ? (
                           <Image
                             src={show.showImage}
                             alt={`${show.title} show`}
                             fill
-                            className="object-cover"
+                            className="object-cover object-center hover:scale-105 transition-transform duration-300"
                             sizes="(max-width: 768px) 100vw, 40vw"
                           />
                         ) : (
@@ -124,14 +141,14 @@ export default function Shows({ data, className = "" }: ShowsProps) {
                     </div>
 
                     {/* Content Section - 3/5 del ancho */}
-                    <div className="col-span-1 lg:col-span-3 p-6 lg:p-10 flex flex-col justify-center">
+                    <div className="col-span-1 lg:col-span-3 p-4 sm:p-6 lg:p-8 flex flex-col justify-center min-w-0">
                       {/* Show Title */}
                       <h3 className="heading-3 text-gabriel-dark mb-4">
                         {show.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="text-gabriel-gray text-lg mb-6 leading-relaxed">
+                      <p className="text-gabriel-gray text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 leading-relaxed break-words">
                         {show.description}
                       </p>
 
@@ -160,16 +177,16 @@ export default function Shows({ data, className = "" }: ShowsProps) {
                           rel="noopener noreferrer"
                           className="btn btn-primary group w-full sm:w-auto"
                         >
-                          {/* <Ticket className="w-4 h-4" /> */}
+                          <Ticket className="w-4 h-4" />
                           COMPRAR ENTRADAS
-                          {/* <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" /> */}
+                          <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </a>
 
                         <a
                           href={`https://wa.me/56932323094?text=Hola Gabriel! Me interesa información sobre el show ${show.title}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="btn btn-outline w-full sm:w-auto"
+                          className="btn btn-outline"
                         >
                           MÁS INFO
                         </a>
@@ -205,17 +222,34 @@ export default function Shows({ data, className = "" }: ShowsProps) {
                 </a>
 
                 <button
-                  onClick={() => {
-                    const element = document.querySelector("#servicios");
-                    if (element) element.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="btn btn-outline btn-lg"
+                  onClick={toggleServices}
+                  className="btn btn-outline btn-lg flex items-center gap-2"
                 >
-                  Ver Servicios
+                  {showServices ? "Ocultar Servicios" : "Ver Servicios"}
+                  {showServices ? (
+                    <ChevronUp size={16} />
+                  ) : (
+                    <ChevronDown size={16} />
+                  )}
                 </button>
               </div>
             </div>
           </motion.div>
+
+          {/* Services Section - Desplegable */}
+          <AnimatePresence>
+            {showServices && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                className="overflow-hidden"
+              >
+                <Services data={servicesData} />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>

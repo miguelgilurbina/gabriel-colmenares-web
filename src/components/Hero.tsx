@@ -7,7 +7,7 @@ import Image from "next/image";
 import { ArrowRight, MessageCircle, Calendar } from "lucide-react";
 import { HeroProps } from "@/lib/types";
 
-export default function Hero({ data, site, className = "" }: HeroProps) {
+export default function Hero({ data, className = "" }: HeroProps) {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -72,6 +72,8 @@ export default function Hero({ data, site, className = "" }: HeroProps) {
           alt="Gabriel Colmenares - Comediante"
           fill
           className="object-cover object-center stage-spotlight-enhanced"
+          style={{ objectPosition: "center center" }}
+          sizes="100vw"
           priority
         />
 
@@ -139,10 +141,10 @@ export default function Hero({ data, site, className = "" }: HeroProps) {
 
           {/* Right Column - CTAs */}
           <motion.div
-            className="flex flex-col items-center lg:items-end justify-center space-y-6"
+            className="flex flex-col items-center lg:items-end justify-center space-y-6 px-4 lg:px-0"
             variants={rightColumnVariants}
           >
-            <div className="space-y-4 w-full max-w-sm">
+            <div className="space-y-4 w-full max-w-xs sm:max-w-sm">
               {/* Primary CTA - Ver Shows */}
               <motion.button
                 onClick={() => scrollToSection(data.primaryCTA.action)}

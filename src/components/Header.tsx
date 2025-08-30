@@ -106,13 +106,13 @@ export default function Header({ data, className = "" }: HeaderProps) {
             onClick={handleLogoClick}
             className="flex items-center hover:opacity-80 transition-opacity"
           >
-            <div className="relative w-18 h-18 md:w-16 md:h-16  sm:w-14 sm:h-14">
+            <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16">
               <Image
                 src="/images/gabriel-logo.png" // Aquí va tu logo real
                 alt="Gabriel Colmenares Logo"
                 fill
                 className="object-contain"
-                sizes="96 px"
+                sizes="72px"
               />
             </div>
           </button>
@@ -162,7 +162,7 @@ export default function Header({ data, className = "" }: HeaderProps) {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden py-6 border-t border-gray-100 bg-white/95 backdrop-blur-md">
+          <div className="lg:hidden py-6 border-t border-gray-100 bg-white/95 backdrop-blur-md backdrop-blur-sm">
             <nav className="flex flex-col space-y-4">
               {navigation.map((item) => (
                 <button

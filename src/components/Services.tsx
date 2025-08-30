@@ -43,7 +43,7 @@ export default function Services({ data, className = "" }: ServicesProps) {
   return (
     <section
       id="servicios"
-      className={`py-12 bg-gabriel-light border-t border-gray-200 ${className}`}
+      className={`py-12 border-t border-gray-200 ${className}`}
     >
       <div className="container mx-auto px-6 lg:px-8">
         <motion.div
@@ -53,12 +53,9 @@ export default function Services({ data, className = "" }: ServicesProps) {
         >
           {/* Header compacto */}
           <motion.div variants={itemVariants} className="text-center mb-8">
-            <h3 className="heading-3 text-gabriel-dark mb-3">
-              También Ofrezco
-            </h3>
-            <p className="text-gabriel-gray max-w-2xl mx-auto">
-              Servicios complementarios para hacer tu evento o proyecto único
-            </p>
+            <h2 className="heading-3 text-gabriel-dark mb-3 section-title">
+              Mis Servicios
+            </h2>
           </motion.div>
 
           {/* Services Grid - Desktop horizontal, Mobile vertical */}

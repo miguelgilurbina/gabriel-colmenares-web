@@ -69,7 +69,7 @@ export default function Contact({ data, className = "" }: ContactProps) {
   ];
 
   return (
-    <section id="contact" className={`py-16 bg-gabriel-light ${className}`}>
+    <section id="contact" className={`py-16  ${className}`}>
       <div className="container mx-auto px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
@@ -79,15 +79,15 @@ export default function Contact({ data, className = "" }: ContactProps) {
         >
           {/* Header */}
           <motion.div variants={itemVariants} className="text-center mb-12">
-            <h2 className="heading-2 text-gabriel-dark mb-4">{data.title}</h2>
-            <p className="text-large text-gabriel-gray max-w-2xl mx-auto">
+            <h2 className="heading-2 text-gabriel-dark mb-4 section-title">{data.title}</h2>
+            {/* <p className="text-large text-gabriel-gray max-w-2xl mx-auto">
               {data.subtitle}
-            </p>
+            </p> */}
           </motion.div>
 
           {/* Social Links Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
-            {socialLinks.map((social, index) => (
+            {socialLinks.map((social) => (
               <motion.div
                 key={social.name}
                 variants={itemVariants}

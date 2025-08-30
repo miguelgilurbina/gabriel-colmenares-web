@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import Image from "next/image";
 import { AboutProps } from "@/lib/types";
 
-export default function About({ data, className = "" }: AboutProps) {
+export default function About({ className = "" }: AboutProps) {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   const containerVariants = {
@@ -88,7 +88,8 @@ export default function About({ data, className = "" }: AboutProps) {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="container mx-auto px-6 lg:px-8 py-20"
+          className="container mx-auto px-6 lg:px-8 py-20 scroll-mt-20"
+          style={{ paddingTop: "96px" }}
         >
           {/* Header - Título del cuaderno */}
           <motion.div variants={itemVariants} className="text-center mb-16">
@@ -314,9 +315,9 @@ export default function About({ data, className = "" }: AboutProps) {
                 href="https://wa.me/56932323094?text=Hola Gabriel! Leí tu historia y me encantaría trabajar contigo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-primary btn-lg group"
+                className="btn btn-primary btn-lg group w-full sm:w-auto text-sm sm:text-lg px-3 py-3 sm:px-8 sm:py-4"
               >
-                Escribamos juntos la próxima página
+                Trabajemos Juntos
               </a>
             </div>
           </motion.div>
