@@ -62,12 +62,6 @@ export default function Footer({ data, className = "" }: FooterProps) {
 
   const socialLinks = [
     {
-      name: "WhatsApp",
-      href: `https://wa.me/${data.whatsapp?.replace(/\D/g, "")}`,
-      icon: MessageCircle,
-      hoverColor: "hover:text-green-500",
-    },
-    {
       name: "Instagram",
       href: `https://instagram.com/${data.instagram?.replace("@", "")}`,
       icon: Instagram,

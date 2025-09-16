@@ -99,20 +99,20 @@ export default function Header({ data, className = "" }: HeaderProps) {
     <header
       className={`fixed w-full top-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 ${className}`}
     >
-      <div className="container mx-auto px-6 lg:px-8">
+      <div className="container  px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo Gabriel - Tamaño más visible */}
           <button
             onClick={handleLogoClick}
             className="flex items-center hover:opacity-80 transition-opacity"
           >
-            <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16">
+            <div className="relative w-36 h-12 sm:w-42 sm:h-14 md:w-48 md:h-16">
               <Image
                 src="/images/gabriel-logo.png" // Aquí va tu logo real
                 alt="Gabriel Colmenares Logo"
                 fill
                 className="object-contain"
-                sizes="72px"
+                sizes="600px"
               />
             </div>
           </button>
@@ -132,15 +132,6 @@ export default function Header({ data, className = "" }: HeaderProps) {
 
           {/* Contact Links - Consistentes */}
           <div className="hidden lg:flex items-center space-x-4">
-            <a
-              href={`https://wa.me/${data.whatsapp.replace(/\D/g, "")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg text-gabriel-gray hover:bg-gabriel-blue hover:text-white transition-all"
-            >
-              <MessageCircle size={20} />
-            </a>
-
             <a
               href={`https://instagram.com/${data.instagram.replace("@", "")}`}
               target="_blank"

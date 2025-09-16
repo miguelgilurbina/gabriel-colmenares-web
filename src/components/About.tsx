@@ -33,6 +33,14 @@ export default function About({ className = "" }: AboutProps) {
   // Testimoniales estructurados
   const testimonials = [
     {
+      name: "Tony Lara",
+      role: "Dueño",
+      company: "Laville",
+      logo: "/images/logos/laville.jpg",
+      text: "Es muy grato compartir ideas y trabajar en conjunto a un artista con tanta creatividad y compromiso con la marca.",
+    },
+
+    {
       name: "Daniela Mujica",
       role: "Project Manager",
       company: "The Culture Makers",
@@ -52,13 +60,6 @@ export default function About({ className = "" }: AboutProps) {
       company: "Flow Barber Studio",
       logo: "/images/logos/flow-barbers.jpg",
       text: "Su participación fue realmente favorecedora: además de ser talentoso, aportó ideas frescas y mostró gran proactividad. Su buena vibra hizo que el proceso creativo fuera mucho más enriquecedor.",
-    },
-    {
-      name: "Tony Lara",
-      role: "Dueño",
-      company: "Laville",
-      logo: "/images/logos/laville.jpg",
-      text: "Es muy grato compartir ideas y trabajar en conjunto a un artista con tanta creatividad y compromiso con la marca.",
     },
   ];
 
@@ -113,20 +114,24 @@ export default function About({ className = "" }: AboutProps) {
               <div className="order-2 lg:order-1">
                 <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg transform rotate-1 border-l-4 border-gabriel-yellow">
                   <h2 className="text-2xl font-bold text-gabriel-dark mb-4 handwritten">
-                    📝 Capítulo 1: De Caracas a Santiago
+                    📝 Capítulo 1: De Caracas a las tablas
                   </h2>
                   <div className="notebook-lines p-4 bg-white/50 rounded-lg">
                     <p className="text-gabriel-gray leading-relaxed mb-4">
-                      Llegué a Santiago con una maleta llena de chistes
-                      venezolanos y la esperanza de hacer reír a chilenos. 5
-                      años después, he aprendido que el humor universal existe,
-                      pero la conexión genuina es lo que realmente importa.
+                      Nacido en Caracas, con el corazón sembrado en Guarenas.
                     </p>
                     <p className="text-gabriel-gray leading-relaxed">
-                      Desde telonear a Luis Slimming y Doctor Escalona, hasta
-                      crear mi productora Alien Caribeño, cada show ha sido una
-                      oportunidad de conectar sin intermediarios.{" "}
-                      <strong>Todo es conmigo, todo es directo.</strong>
+                      En el 2019 a Chile luego de un paso breve por Perú, y de
+                      la pandemia intenté probar algo nuevo. Tras ver a Edo
+                      Caroe en un show en vivo,
+                      <strong> supe que tenía que hacer esto.</strong>
+                    </p>
+                    <p className="text-gabriel-gray leading-relaxed mb-4">
+                      Encontré en la comedia no solo un escape, sino un
+                      propósito:{" "}
+                      <strong>
+                        conectar con las personas a través de la risa y el arte.
+                      </strong>
                     </p>
                   </div>
                 </div>
@@ -171,19 +176,20 @@ export default function About({ className = "" }: AboutProps) {
               <div className="order-2">
                 <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg transform -rotate-1 border-l-4 border-gabriel-dark">
                   <h2 className="text-2xl font-bold text-gabriel-dark mb-4 handwritten">
-                    🎭 Capítulo 2: La Magia de la Improvisación
+                    🎭 Capítulo 2: El camino del Artista
                   </h2>
                   <div className="notebook-lines p-4 bg-white/50 rounded-lg">
                     <p className="text-gabriel-gray leading-relaxed mb-4">
-                      Los 4 sold outs consecutivos en Mix Chatarritas no fueron
-                      casualidad. Cada show de crowdwork es único porque la
-                      audiencia es única. No hay dos noches iguales.
-                    </p>
-                    <p className="text-gabriel-gray leading-relaxed">
-                      La improvisación me ha enseñado a leer la sala, adaptarme
-                      al momento y crear conexiones auténticas. Es donde mi
-                      experiencia venezolana se encuentra con la realidad
-                      chilena, y surge algo completamente nuevo.
+                      Luego de conectar con el stand up y el humor, tuve clara
+                      una cosa:{" "}
+                      <strong>
+                        Quiero hacer humor para la gente sin importar la
+                        nacionalidad.
+                      </strong>{" "}
+                      Arrancó la espiral de aprendizaje: talleres de
+                      improvisación teatral, clown, host de comedia,
+                      presentación de eventos musicales, un pódcast y una
+                      productora creada y llevada por comediantes emergentes.
                     </p>
                   </div>
                 </div>
@@ -198,15 +204,21 @@ export default function About({ className = "" }: AboutProps) {
                 </h2>
                 <div className="notebook-lines p-4 bg-white/50 rounded-lg">
                   <p className="text-gabriel-gray leading-relaxed mb-4">
-                    La comedia abrió puertas a la dirección creativa, el
-                    podcasting y la creación de contenido. Cada proyecto es una
-                    oportunidad de contar historias desde ángulos diferentes.
+                    <strong>La comedia abrió puertas.</strong>
                   </p>
                   <p className="text-gabriel-gray leading-relaxed">
-                    Alien Caribeño no es solo una productora, es mi forma de
-                    mantener esa conexión directa en cada proyecto, sea un
-                    videoclip, un evento corporativo o una colaboración
-                    creativa.
+                    La dirección creativa, incluso en proyectos musicales, el
+                    podcasting y la creación de contenido, vital para las
+                    colaboraciones y mi crecimiento en redes.
+                  </p>
+                  <p className="text-gabriel-gray leading-relaxed">
+                    Cada proyecto es una oportunidad de contar historias desde
+                    ángulos diferentes y conectar con más personas.
+                  </p>
+                  <p className="text-gabriel-gray leading-relaxed">
+                    <strong>
+                      Gracias por estar y gracias a los que faltan.
+                    </strong>
                   </p>
                 </div>
               </div>
@@ -229,14 +241,14 @@ export default function About({ className = "" }: AboutProps) {
                 <div className="bg-white/95 backdrop-blur-sm rounded-xl p-8 shadow-xl border border-gray-200 min-h-[300px] flex flex-col justify-between">
                   {/* Header */}
                   <div className="flex items-center mb-6">
-                    <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mr-4">
+                    <div className="w-16 h-16 bg-gray-100 rounded-xl overflow-hidden mr-4 flex-shrink-0">
                       {testimonials[currentTestimonial].logo ? (
                         <Image
                           src={testimonials[currentTestimonial].logo}
                           alt={`${testimonials[currentTestimonial].company} logo`}
-                          width={70}
-                          height={70}
-                          className="object-contain"
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-contain"
                         />
                       ) : (
                         <div className="w-8 h-8 bg-gabriel-blue rounded-full flex items-center justify-center">

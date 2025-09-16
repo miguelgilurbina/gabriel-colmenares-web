@@ -160,8 +160,8 @@ export default function Hero({ data, className = "" }: HeroProps) {
 
               {/* Secondary CTA - Contacto */}
               <motion.button
-                onClick={() => scrollToSection("#contacto")}
-                className="w-full bg-transparent border-2 border-gabriel-white text-gabriel-blue px-8 py-4 text-lg md:text-xl font-bold rounded-xl hover:bg-gabriel-blue hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg group flex items-center justify-center gap-3"
+                onClick={() => scrollToSection("#contact")}
+                className="w-full bg-transparent border-2 border-gabriel-blue text-gabriel-blue px-8 py-4 text-lg md:text-xl font-bold rounded-xl hover:bg-gabriel-white hover:border-white hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg group flex items-center justify-center gap-3"
                 variants={ctaVariants}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}

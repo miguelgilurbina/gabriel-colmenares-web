@@ -2,7 +2,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MessageCircle, Instagram, Youtube, Headphones } from "lucide-react";
+import { Instagram, Youtube, Headphones } from "lucide-react";
 import { ContactProps } from "@/lib/types";
 
 export default function Contact({ data, className = "" }: ContactProps) {
@@ -27,18 +27,6 @@ export default function Contact({ data, className = "" }: ContactProps) {
   };
 
   const socialLinks = [
-    {
-      name: "WhatsApp",
-      description: "Contáctame directamente",
-      icon: MessageCircle,
-      href: `https://wa.me/${data.whatsapp?.replace(
-        /\D/g,
-        ""
-      )}?text=Hola Gabriel! Vi tu página web y me interesa hablar contigo`,
-      color: "hover:bg-green-500",
-      bgColor: "bg-green-100",
-      iconColor: "text-green-600 group-hover:text-white",
-    },
     {
       name: "Instagram",
       description: data.instagram,
@@ -70,7 +58,7 @@ export default function Contact({ data, className = "" }: ContactProps) {
 
   return (
     <section id="contact" className={`py-16  ${className}`}>
-      <div className="container mx-auto px-6 lg:px-8">
+      <div className="container mx-auto px-6 lg:px-8 ">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -79,7 +67,9 @@ export default function Contact({ data, className = "" }: ContactProps) {
         >
           {/* Header */}
           <motion.div variants={itemVariants} className="text-center mb-12">
-            <h2 className="heading-2 text-gabriel-dark mb-4 section-title">{data.title}</h2>
+            <h2 className="heading-2 text-gabriel-dark mb-4 section-title">
+              {data.title}
+            </h2>
             {/* <p className="text-large text-gabriel-gray max-w-2xl mx-auto">
               {data.subtitle}
             </p> */}
