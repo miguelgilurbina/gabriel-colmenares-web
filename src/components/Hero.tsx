@@ -134,8 +134,7 @@ export default function Hero({ data, className = "" }: HeroProps) {
               className="text-lg text-gray-300 max-w-lg leading-relaxed hidden md:block"
               variants={ctaVariants}
             >
-              Desde Caracas para el mundo, trayendo humor inteligente y
-              situaciones que todos vivimos pero nadie se atreve a contar.
+              Stand up, Impro, Podcast, sketches, guiones y todo eso con un riñón.
             </motion.p>
           </motion.div>
 

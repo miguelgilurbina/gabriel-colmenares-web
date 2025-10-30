@@ -98,9 +98,6 @@ export default function About({ className = "" }: AboutProps) {
               <h1 className="heading-1 text-gabriel-dark mb-4 handwritten">
                 La Historia de Gabriel
               </h1>
-              <p className="text-gabriel-gray italic">
-                *Apuntes desde Santiago, con amor y risas*
-              </p>
             </div>
           </motion.div>
 
@@ -116,22 +113,9 @@ export default function About({ className = "" }: AboutProps) {
                   <h2 className="text-2xl font-bold text-gabriel-dark mb-4 handwritten">
                     📝 Capítulo 1: De Caracas a las tablas
                   </h2>
-                  <div className="notebook-lines p-4 bg-white/50 rounded-lg">
+                  <div className="p-6 bg-white/70 rounded-lg border-l-2 border-gabriel-blue/30">
                     <p className="text-gabriel-gray leading-relaxed mb-4">
-                      Nacido en Caracas, con el corazón sembrado en Guarenas.
-                    </p>
-                    <p className="text-gabriel-gray leading-relaxed">
-                      En el 2019 a Chile luego de un paso breve por Perú, y de
-                      la pandemia intenté probar algo nuevo. Tras ver a Edo
-                      Caroe en un show en vivo,
-                      <strong> supe que tenía que hacer esto.</strong>
-                    </p>
-                    <p className="text-gabriel-gray leading-relaxed mb-4">
-                      Encontré en la comedia no solo un escape, sino un
-                      propósito:{" "}
-                      <strong>
-                        conectar con las personas a través de la risa y el arte.
-                      </strong>
+                      Mi llegada a Chile en 2019, tras una breve etapa en Perú, y el desafío de la pandemia, me impulsaron a buscar un nuevo camino. Todo cambió al ver a Edo Caroe en vivo: en ese momento supe que mi lugar era el escenario. En la comedia, encontré más que un escape; hallé un propósito claro: conectar, sanar y unir a las personas a través de la risa y el arte.
                     </p>
                   </div>
                 </div>
@@ -178,18 +162,9 @@ export default function About({ className = "" }: AboutProps) {
                   <h2 className="text-2xl font-bold text-gabriel-dark mb-4 handwritten">
                     🎭 Capítulo 2: El camino del Artista
                   </h2>
-                  <div className="notebook-lines p-4 bg-white/50 rounded-lg">
+                  <div className="p-6 bg-white/70 rounded-lg border-l-2 border-gabriel-blue/30">
                     <p className="text-gabriel-gray leading-relaxed mb-4">
-                      Luego de conectar con el stand up y el humor, tuve clara
-                      una cosa:{" "}
-                      <strong>
-                        Quiero hacer humor para la gente sin importar la
-                        nacionalidad.
-                      </strong>{" "}
-                      Arrancó la espiral de aprendizaje: talleres de
-                      improvisación teatral, clown, host de comedia,
-                      presentación de eventos musicales, un pódcast y una
-                      productora creada y llevada por comediantes emergentes.
+                      Mi visión se consolidó rápidamente: quiero crear un humor que trascienda fronteras y nacionalidades. Esto desató una espiral de aprendizaje constante y diversificada. Me sumergí en talleres de improvisación teatral y clown, incursioné como host de comedia y presentador de eventos musicales, lancé un podcast propio y cofundé una productora enfocada en impulsar a nuevos talentos emergentes.
                     </p>
                   </div>
                 </div>
@@ -202,23 +177,9 @@ export default function About({ className = "" }: AboutProps) {
                 <h2 className="text-2xl font-bold text-gabriel-dark mb-4 handwritten">
                   🎬 Capítulo 3: Más Allá del Micrófono
                 </h2>
-                <div className="notebook-lines p-4 bg-white/50 rounded-lg">
+                <div className="p-6 bg-white/70 rounded-lg border-l-2 border-gabriel-blue/30">
                   <p className="text-gabriel-gray leading-relaxed mb-4">
-                    <strong>La comedia abrió puertas.</strong>
-                  </p>
-                  <p className="text-gabriel-gray leading-relaxed">
-                    La dirección creativa, incluso en proyectos musicales, el
-                    podcasting y la creación de contenido, vital para las
-                    colaboraciones y mi crecimiento en redes.
-                  </p>
-                  <p className="text-gabriel-gray leading-relaxed">
-                    Cada proyecto es una oportunidad de contar historias desde
-                    ángulos diferentes y conectar con más personas.
-                  </p>
-                  <p className="text-gabriel-gray leading-relaxed">
-                    <strong>
-                      Gracias por estar y gracias a los que faltan.
-                    </strong>
+                    El camino del humor me ha abierto puertas inesperadas, expandiendo mis habilidades hacia la dirección creativa, el podcasting y la creación estratégica de contenido. Estas disciplinas han sido vitales para fortalecer mis colaboraciones y consolidar mi crecimiento en redes. Hoy, cada proyecto es una nueva oportunidad para contar historias auténticas, explorando ángulos únicos y generando conexiones más profundas. Agradezco de corazón a quienes me acompañan en este viaje y a quienes están por llegar.
                   </p>
                 </div>
               </div>
