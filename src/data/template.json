@@ -118,14 +118,14 @@
   },
   "shows": {
     "title": "Shows Actuales",
-    "subtitle": "Dos propuestas únicas de comedia. Elige tu experiencia.",
+    "subtitle": "Un viaje cómico que no te puedes perder.",
     "mainShows": [
       {
         "id": "+30k20",
         "title": "+30K20",
-        "description": "El show que ha conquistado Santiago. Humor inteligente sobre la vida después de los 30 en pleno 2020s.",
-        "date": "Sábados 21:00",
-        "venue": "Teatro XYZ, Santiago",
+        "description": "En esta ocasión, luego de 2 fechas exitosas de Más 30 que 20, Gabriel nos trae una obra más desarrollada de este concepto: Un viaje hilarante y honesto a través de la crisis de los 30 sin todavía tenerla. Pensamientos, situaciones y formas de ver la vida cotidiana desde otra perspectiva. Sumérgete en este viaje cómico, compra tu entrada y prepárate para la terapia de risa que tanto necesitas.",
+        "date": "Sábado 6 de diciembre a las 7:30",
+        "venue": "Rancagua 395 | Gran refugio - Providencia",
         "status": "Entradas disponibles",
         "statusColor": "text-green-600",
         "bgGradient": "from-gabriel-blue to-blue-600",
@@ -136,8 +136,10 @@
           "Material completamente nuevo",
           "Experiencia interactiva"
         ]
-      },
-      {
+      }
+    ],
+    "_commentedShows": {
+      "idilico": {
         "id": "idilico",
         "title": "IDÍLICO",
         "description": "Mi nuevo unipersonal. Una mirada fresca y divertida a las expectativas vs realidad de la vida adulta.",
@@ -154,7 +156,7 @@
           "Material exclusivo"
         ]
       }
-    ],
+    },
     "eventInquiry": {
       "title": "¿Eventos Corporativos o Privados?",
       "description": "Adaptamos cualquiera de estos shows para tu evento especial. Shows corporativos, celebraciones privadas y eventos únicos.",
