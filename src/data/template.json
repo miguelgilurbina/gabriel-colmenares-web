@@ -101,7 +101,20 @@
     "email": "gabrielcrodriguez0@gmail.com",
     "instagram": "@uncolmenares",
     "youtube": "https://www.youtube.com/@uncolmenares",
-    "spotify": "https://open.spotify.com/show/3Zax7N0vOGKMCp6en30ERf"
+    "spotify": "https://open.spotify.com/show/3Zax7N0vOGKMCp6en30ERf",
+    "featuredContent": {
+      "short": {
+        "title": "Participación en Short",
+        "description": "Sketch de comedia que conectó con miles",
+        "url": "https://www.youtube.com/watch?v=ev93t9vrjo4&t=21s"
+      },
+      "podcast": {
+        "title": "Episodio Destacado",
+        "description": "Conversación profunda sobre comedia y creatividad",
+        "youtubeUrl": "https://www.youtube.com/watch?v=KohWADYYaWQ",
+        "spotifyUrl": "https://open.spotify.com/episode/3fOcxJgMml8HynKUt65wgi?si=yNsA9GiDTqCN1zrzuVWJvw&nd=1&dlsi=ef478167f2db42bf"
+      }
+    }
   },
   "shows": {
     "title": "Shows Actuales",
@@ -116,7 +129,7 @@
         "status": "Entradas disponibles",
         "statusColor": "text-green-600",
         "bgGradient": "from-gabriel-blue to-blue-600",
-        "ticketsUrl": "https://passline.com/eventos/gabriel-colmenares-30k20",
+        "ticketsUrl": "https://www.passline.com/eventos/mas-30-que-20-3ra-edicion",
         "showImage": "/images/30k20-flyer.jpg",
         "features": [
           "90 minutos de comedia",

@@ -3,7 +3,7 @@
 import Hero from "@/components/Hero";
 // import About from "@/components/About";
 // import Services from "@/components/Services";
-
+// import Portfolio from "@/components/Portfolio";
 import Shows from "@/components/Shows";
 import Contact from "@/components/Contact";
 
@@ -29,11 +29,13 @@ export default function HomePage() {
           {/* Hero Section */}
           <Hero data={siteData.hero} site={siteData.site} />
           {/* About Section - Su historia */}
-          {/* <About data={siteData.about} />
-        Shows Section - Próximos shows (placeholder para Passline) */}
+          {/* <About data={siteData.about} /> */}
+          {/* Portfolio Section - Casos de éxito y contenido */}
+          {/* <Portfolio data={siteData.portfolio} /> */}
+          {/* Shows Section - Próximos shows (placeholder para Passline) */}
           <Shows
             data={siteData.shows}
-            servicesData={siteData.services} // ← Añadir esta prop
+            servicesData={siteData.services}
           />
           {/* Contact Section - Contacto directo */}
           <Contact data={siteData.contact} />
