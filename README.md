@@ -11,11 +11,13 @@ Página web para Gabriel Colmenares (@uncolmenares) - Comediante & Director Crea
 
 ## 🚀 Stack Técnico
 
-- Next.js 14 (App Router)
+- Next.js 15.4.3 (App Router)
 - TypeScript
 - Tailwind CSS v3
 - Framer Motion
 - Lucide React
+- React Hook Form + Zod
+- Nodemailer
 
 ## 🎯 Objetivos Principales
 
@@ -28,23 +30,78 @@ Página web para Gabriel Colmenares (@uncolmenares) - Comediante & Director Crea
 
 ### ✅ Implementadas
 
-- Landing page personalizada
-- Sección Shows (placeholder)
-- Portfolio de casos de éxito
+- Hero section con CTAs duales
+- Sección Shows con integración Passline
+- Servicios desplegables desde Shows
+- Sección de contenido destacado (videos/podcasts)
 - Contacto directo WhatsApp/Instagram
-- SEO básico optimizado
+- Sistema de datos centralizado (template.json)
+- Diseño responsive mobile-first
+- Animaciones con Framer Motion
+- SEO optimizado
 
 ### 🔄 En Desarrollo
 
-- Integración Passline API (entradas)
-- Calendar booking system
+- About page completa
 - Instagram/Spotify feeds automáticos
+- Sistema de calendario para bookings
 
 ## 🎨 Paleta de Colores
 
-- **Primario:** #2C3E50 (Azul marino profesional)
-- **Secundario:** #ECF0F1 (Gris claro elegante)
-- **Acento:** #F39C12 (Naranja cálido energético)
+- **Gabriel Blue:** #1E3A8A (Azul profesional)
+- **Gabriel Yellow:** #FCD34D (Amarillo vibrante)
+- **Gabriel Dark:** #1F2937 (Gris oscuro para texto)
+- **Gabriel Gray:** #6B7280 (Gris medio para texto secundario)
+
+## 👨‍💻 Desarrollo
+
+### Estructura del Proyecto
+
+```
+src/
+├── app/              # Next.js app router
+├── components/       # React components
+├── data/            # template.json - datos centralizados
+└── lib/             # TypeScript types
+```
+
+### Branch Strategy
+
+- `main` - Código en producción
+- `gabriel-customization` - Desarrollo activo
+
+### Comandos
+
+```bash
+# Desarrollo
+npm run dev
+
+# Build
+npm run build
+
+# Producción
+npm start
+
+# Linting
+npm run lint
+```
+
+### Claude Code Setup
+
+Este proyecto incluye configuración de Claude Code para desarrollo asistido por IA:
+
+- **Custom Commands**: Slash commands para tareas comunes
+  - `/review-changes` - Revisar cambios antes de commit
+  - `/update-content` - Actualizar template.json
+  - `/add-component` - Crear nuevos componentes
+  - `/prepare-deploy` - Checklist de deployment
+  - `/create-issue` - Crear GitHub issues
+
+- **Context Sessions**: Mantener contexto entre sesiones de trabajo
+
+- **GitHub Integration**: Templates de issues y workflows automáticos
+
+Ver `.claude/README.md` para más detalles.
 
 ## 🚀 Deploy
 

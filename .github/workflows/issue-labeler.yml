@@ -1,0 +1,56 @@
+name: Issue Labeler
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  label-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add priority label based on keywords
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const body = issue.body || '';
+            const title = issue.title || '';
+            const content = (title + ' ' + body).toLowerCase();
+
+            const labels = [];
+
+            // Component labels
+            if (content.includes('hero')) labels.push('component: hero');
+            if (content.includes('shows')) labels.push('component: shows');
+            if (content.includes('services')) labels.push('component: services');
+            if (content.includes('contact')) labels.push('component: contact');
+            if (content.includes('header')) labels.push('component: header');
+            if (content.includes('footer')) labels.push('component: footer');
+
+            // Priority labels
+            if (content.includes('urgent') || content.includes('critical')) {
+              labels.push('priority: high');
+            }
+
+            // Type labels (if not already set by template)
+            if (content.includes('bug') || content.includes('error') || content.includes('broken')) {
+              labels.push('type: bug');
+            }
+            if (content.includes('feature') || content.includes('enhancement')) {
+              labels.push('type: enhancement');
+            }
+            if (content.includes('content') || content.includes('text') || content.includes('link')) {
+              labels.push('type: content');
+            }
+
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: labels
+              });
+            }
