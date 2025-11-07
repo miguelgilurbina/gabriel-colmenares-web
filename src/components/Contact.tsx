@@ -36,24 +36,6 @@ export default function Contact({ data, className = "" }: ContactProps) {
       bgColor: "bg-pink-100",
       iconColor: "text-pink-600 group-hover:text-white",
     },
-    {
-      name: "YouTube",
-      description: "@uncolmenares",
-      icon: Youtube,
-      href: data.youtube,
-      color: "hover:bg-red-500",
-      bgColor: "bg-red-100",
-      iconColor: "text-red-600 group-hover:text-white",
-    },
-    {
-      name: "Dialogo Interno",
-      description: "Escúchalo en Spotify",
-      icon: Headphones,
-      href: data.spotify,
-      color: "hover:bg-green-600",
-      bgColor: "bg-green-100",
-      iconColor: "text-green-700 group-hover:text-white",
-    },
   ];
 
   return (
@@ -161,13 +143,13 @@ export default function Contact({ data, className = "" }: ContactProps) {
             </motion.div>
           )}
 
-          {/* Social Links Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+          {/* Social Links */}
+          <div className="flex justify-center">
             {socialLinks.map((social) => (
               <motion.div
                 key={social.name}
                 variants={itemVariants}
-                className="group"
+                className="group w-full max-w-sm"
               >
                 <a
                   href={social.href}
