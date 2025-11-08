@@ -2,10 +2,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Instagram, Youtube, Headphones, Video, Play, ExternalLink } from "lucide-react";
+import { Instagram, Youtube, Headphones, Video, Play, ExternalLink, ArrowRight } from "lucide-react";
 import { ContactProps } from "@/lib/types";
 
-export default function Contact({ data, className = "" }: ContactProps) {
+export default function Contact({ data, eventInquiry, className = "" }: ContactProps) {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -179,6 +179,32 @@ export default function Contact({ data, className = "" }: ContactProps) {
               </motion.div>
             ))}
           </div>
+
+          {/* Event Inquiries Section */}
+          {eventInquiry && (
+            <motion.div variants={itemVariants} className="mt-12">
+              <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm max-w-4xl mx-auto text-center">
+                <h3 className="heading-3 text-gabriel-dark mb-4">
+                  {eventInquiry.title}
+                </h3>
+                <p className="text-gabriel-gray mb-6 max-w-2xl mx-auto">
+                  {eventInquiry.description}
+                </p>
+
+                <a
+                  href={`https://wa.me/56932323094?text=${encodeURIComponent(
+                    eventInquiry.whatsappMessage
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary btn-lg group inline-flex items-center"
+                >
+                  Solicitar Cotización
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </section>

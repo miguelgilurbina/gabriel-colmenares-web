@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Calendar,
   MapPin,
-  ArrowRight,
   Ticket,
   ExternalLink,
   ChevronDown,
@@ -198,45 +197,24 @@ export default function Shows({
             ))}
           </div>
 
-          {/* Bottom Section - Event Inquiries */}
-          <motion.div variants={itemVariants}>
+          {/* Services Section - Desplegable */}
+          <motion.div variants={itemVariants} className="mt-8">
             <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm max-w-4xl mx-auto text-center">
-              <h3 className="heading-3 text-gabriel-dark mb-4">
-                {showsData.eventInquiry.title}
-              </h3>
-              <p className="text-gabriel-gray mb-6 max-w-2xl mx-auto">
-                {showsData.eventInquiry.description}
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href={`https://wa.me/56932323094?text=${encodeURIComponent(
-                    showsData.eventInquiry.whatsappMessage
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary btn-lg group"
-                >
-                  Solicitar Cotización
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </a>
-
-                <button
-                  onClick={toggleServices}
-                  className="btn btn-outline btn-lg flex items-center gap-2"
-                >
-                  {showServices ? "Ocultar Servicios" : "Ver Servicios"}
-                  {showServices ? (
-                    <ChevronUp size={16} />
-                  ) : (
-                    <ChevronDown size={16} />
-                  )}
-                </button>
-              </div>
+              <button
+                onClick={toggleServices}
+                className="btn btn-outline btn-lg flex items-center gap-2 mx-auto"
+              >
+                {showServices ? "Ocultar Servicios" : "Ver Servicios"}
+                {showServices ? (
+                  <ChevronUp size={16} />
+                ) : (
+                  <ChevronDown size={16} />
+                )}
+              </button>
             </div>
           </motion.div>
 
-          {/* Services Section - Desplegable */}
+          {/* Services Section - Content */}
           <AnimatePresence>
             {showServices && (
               <motion.div

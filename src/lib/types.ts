@@ -144,6 +144,11 @@ export interface ShowsProps {
 
 export interface ContactProps {
   data: SiteData['contact'];
+  eventInquiry?: {
+    title: string;
+    description: string;
+    whatsappMessage: string;
+  };
   className?: string;
 }
 

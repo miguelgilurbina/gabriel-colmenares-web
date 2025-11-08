@@ -38,7 +38,10 @@ export default function HomePage() {
             servicesData={siteData.services}
           />
           {/* Contact Section - Contacto directo */}
-          <Contact data={siteData.contact} />
+          <Contact
+            data={siteData.contact}
+            eventInquiry={siteData.shows?.eventInquiry}
+          />
         </div>
       </div>
     </main>
