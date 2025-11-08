@@ -33,14 +33,12 @@ export default function HomePage() {
           {/* Portfolio Section - Casos de éxito y contenido */}
           {/* <Portfolio data={siteData.portfolio} /> */}
           {/* Shows Section - Próximos shows (placeholder para Passline) */}
-          <Shows
-            data={siteData.shows}
-            servicesData={siteData.services}
-          />
+          <Shows data={siteData.shows} />
           {/* Contact Section - Contacto directo */}
           <Contact
             data={siteData.contact}
             eventInquiry={siteData.shows?.eventInquiry}
+            servicesData={siteData.services}
           />
         </div>
       </div>

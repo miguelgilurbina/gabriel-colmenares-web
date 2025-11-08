@@ -1,11 +1,22 @@
 // src/components/Contact.tsx - Minimal Social Links
 "use client";
 
-import { motion } from "framer-motion";
-import { Instagram, Youtube, Headphones, Video, Play, ExternalLink, ArrowRight } from "lucide-react";
-import { ContactProps } from "@/lib/types";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Instagram, Youtube, Headphones, Video, Play, ExternalLink, ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
+import { ContactProps, ServicesProps } from "@/lib/types";
+import Services from "./Services";
 
-export default function Contact({ data, eventInquiry, className = "" }: ContactProps) {
+interface ContactWithServicesProps extends ContactProps {
+  servicesData?: ServicesProps["data"];
+}
+
+export default function Contact({ data, eventInquiry, servicesData = [], className = "" }: ContactWithServicesProps) {
+  const [showServices, setShowServices] = useState(false);
+
+  const toggleServices = () => {
+    setShowServices(!showServices);
+  };
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -205,6 +216,38 @@ export default function Contact({ data, eventInquiry, className = "" }: ContactP
               </div>
             </motion.div>
           )}
+
+          {/* Services Section - Toggle Button */}
+          <motion.div variants={itemVariants} className="mt-12">
+            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm max-w-4xl mx-auto text-center">
+              <button
+                onClick={toggleServices}
+                className="btn btn-outline btn-lg flex items-center gap-2 mx-auto"
+              >
+                {showServices ? "Ocultar Servicios" : "Ver Servicios"}
+                {showServices ? (
+                  <ChevronUp size={16} />
+                ) : (
+                  <ChevronDown size={16} />
+                )}
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Services Section - Collapsible Content */}
+          <AnimatePresence>
+            {showServices && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                className="overflow-hidden"
+              >
+                <Services data={servicesData} />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>

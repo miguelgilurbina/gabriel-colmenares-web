@@ -1,34 +1,20 @@
-// src/components/Shows.tsx - With Services Integration
+// src/components/Shows.tsx
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Calendar,
   MapPin,
   Ticket,
   ExternalLink,
-  ChevronDown,
-  ChevronUp,
 } from "lucide-react";
 import Image from "next/image";
-import { ShowsProps, ServicesProps } from "@/lib/types";
-import Services from "./Services";
-
-interface ShowsWithServicesProps extends ShowsProps {
-  servicesData?: ServicesProps["data"];
-}
+import { ShowsProps } from "@/lib/types";
 
 export default function Shows({
   data,
-  servicesData = [],
   className = "",
-}: ShowsWithServicesProps) {
-  const [showServices, setShowServices] = useState(false);
-
-  const toggleServices = () => {
-    setShowServices(!showServices);
-  };
+}: ShowsProps) {
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -196,38 +182,6 @@ export default function Shows({
               </motion.div>
             ))}
           </div>
-
-          {/* Services Section - Desplegable */}
-          <motion.div variants={itemVariants} className="mt-8">
-            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm max-w-4xl mx-auto text-center">
-              <button
-                onClick={toggleServices}
-                className="btn btn-outline btn-lg flex items-center gap-2 mx-auto"
-              >
-                {showServices ? "Ocultar Servicios" : "Ver Servicios"}
-                {showServices ? (
-                  <ChevronUp size={16} />
-                ) : (
-                  <ChevronDown size={16} />
-                )}
-              </button>
-            </div>
-          </motion.div>
-
-          {/* Services Section - Content */}
-          <AnimatePresence>
-            {showServices && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="overflow-hidden"
-              >
-                <Services data={servicesData} />
-              </motion.div>
-            )}
-          </AnimatePresence>
         </motion.div>
       </div>
     </section>
