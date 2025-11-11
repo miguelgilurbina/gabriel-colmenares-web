@@ -79,7 +79,7 @@
       "title": "Show +30k20 - Sold Out",
       "description": "Mi unipersonal más exitoso, 100 personas sold out",
       "result": "100% ocupación, reposiciones solicitadas",
-      "image": "/images/show-30k20.jpeg"
+      "image": "/images/show-30k20.jpg"
     },
     {
       "title": "Mix Chatarritas - 4 Sold Outs",
@@ -130,7 +130,7 @@
         "statusColor": "text-green-600",
         "bgGradient": "from-gabriel-blue to-blue-600",
         "ticketsUrl": "https://www.passline.com/eventos/mas-30-que-20-3ra-edicion",
-        "showImage": "/images/30k20-flyer.jpg",
+        "showImage": "/images/30k20-flyer.jpeg",
         "features": [
           "90 minutos de comedia",
           "Material completamente nuevo",
