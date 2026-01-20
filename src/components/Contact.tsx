@@ -248,10 +248,10 @@ export default function Contact({ data, eventInquiry, servicesData = [], classNa
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-primary btn-lg group inline-flex items-center"
+                  className="btn btn-primary btn-lg group inline-flex items-center gap-2 w-full sm:w-auto justify-center"
                 >
                   Solicitar Cotización
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
             </motion.div>
@@ -262,7 +262,7 @@ export default function Contact({ data, eventInquiry, servicesData = [], classNa
             <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm max-w-4xl mx-auto text-center">
               <button
                 onClick={toggleServices}
-                className="btn btn-outline btn-lg flex items-center gap-2 mx-auto"
+                className="btn btn-outline btn-lg flex items-center gap-2 mx-auto w-full sm:w-auto justify-center"
               >
                 {showServices ? "Ocultar Servicios" : "Ver Servicios"}
                 {showServices ? (

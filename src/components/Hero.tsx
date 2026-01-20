@@ -147,27 +147,27 @@ export default function Hero({ data, className = "" }: HeroProps) {
               {/* Primary CTA - Ver Shows */}
               <motion.button
                 onClick={() => scrollToSection(data.primaryCTA.action)}
-                className="w-full bg-gabriel-blue border-2 border-gabriel-white text-white px-8 py-4 text-lg md:text-xl font-bold rounded-xl hover:bg-white hover:border-black hover:text-black transition-all duration-300 transform hover:scale-105 shadow-2xl group flex items-center justify-center gap-3"
+                className="w-full bg-gabriel-blue border-2 border-gabriel-white text-white px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg md:text-xl font-bold rounded-xl hover:bg-white hover:border-black hover:text-black transition-all duration-300 transform hover:scale-105 shadow-2xl group flex items-center justify-center gap-2 sm:gap-3"
                 variants={ctaVariants}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Calendar className="w-5 h-5" />
+                <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
                 VER SHOWS
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </motion.button>
 
               {/* Secondary CTA - Contacto */}
               <motion.button
                 onClick={() => scrollToSection("#contact")}
-                className="w-full bg-transparent border-2 border-gabriel-blue text-gabriel-blue px-8 py-4 text-lg md:text-xl font-bold rounded-xl hover:bg-gabriel-white hover:border-white hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg group flex items-center justify-center gap-3"
+                className="w-full bg-transparent border-2 border-gabriel-blue text-gabriel-blue px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg md:text-xl font-bold rounded-xl hover:bg-gabriel-white hover:border-white hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg group flex items-center justify-center gap-2 sm:gap-3"
                 variants={ctaVariants}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <MessageCircle className="w-5 h-5" />
+                <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                 CONTÁCTAME
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </motion.button>
 
               {/* Optional: Social proof or additional info */}

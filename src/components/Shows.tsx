@@ -101,7 +101,7 @@ export default function Shows({
                   <div className="grid lg:grid-cols-5 gap-0">
                     {/* Image Section - 2/5 del ancho */}
                     <div className="lg:col-span-2 relative">
-                      <div className="aspect-[4/3] lg:aspect-[3/4] relative bg-gray-100">
+                      <div className="aspect-[9/16] lg:aspect-[3/4] relative bg-gray-100">
                         {show.showImage ? (
                           <Image
                             src={show.showImage}
@@ -155,12 +155,12 @@ export default function Shows({
                       </div>
 
                       {/* CTA */}
-                      <div className="flex flex-col sm:flex-row gap-4">
+                      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                         <a
                           href={show.ticketsUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="btn btn-primary group w-full sm:w-auto"
+                          className="btn btn-primary group w-full sm:w-auto gap-2"
                         >
                           <Ticket className="w-4 h-4" />
                           COMPRAR ENTRADAS
@@ -171,7 +171,7 @@ export default function Shows({
                           href={`https://wa.me/56932323094?text=Hola Gabriel! Me interesa información sobre el show ${show.title}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="btn btn-outline"
+                          className="btn btn-outline w-full sm:w-auto"
                         >
                           MÁS INFO
                         </a>
