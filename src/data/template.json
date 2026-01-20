@@ -102,39 +102,53 @@
     "instagram": "@uncolmenares",
     "youtube": "https://www.youtube.com/@uncolmenares",
     "spotify": "https://open.spotify.com/show/3Zax7N0vOGKMCp6en30ERf",
-    "featuredContent": {
-      "short": {
-        "title": "FAMILIA PARA NORMAL",
-        "description": "Sketch de comedia que conectó con miles",
-        "url": "https://www.youtube.com/watch?v=ev93t9vrjo4&t=21s"
+    "featuredContent": [
+      {
+        "type": "video",
+        "title": "Tarantin",
+        "description": "Proyecto de sketches en YouTube",
+        "url": "https://www.youtube.com/watch?v=FDnj6U1TbRQ",
+        "icon": "Video",
+        "color": "red"
       },
-      "podcast": {
+      {
+        "type": "video",
+        "title": "Más 30 que 20",
+        "description": "Especial de stand up completo en YouTube",
+        "url": "https://www.youtube.com/watch?v=mF3OeSBGS18",
+        "icon": "Mic",
+        "color": "blue"
+      },
+      {
+        "type": "podcast",
         "title": "Episodio Destacado",
         "description": "Conversación profunda sobre comedia y creatividad",
         "youtubeUrl": "https://www.youtube.com/watch?v=KohWADYYaWQ",
-        "spotifyUrl": "https://open.spotify.com/episode/3fOcxJgMml8HynKUt65wgi?si=yNsA9GiDTqCN1zrzuVWJvw&nd=1&dlsi=ef478167f2db42bf"
+        "spotifyUrl": "https://open.spotify.com/episode/3fOcxJgMml8HynKUt65wgi?si=yNsA9GiDTqCN1zrzuVWJvw&nd=1&dlsi=ef478167f2db42bf",
+        "icon": "Headphones",
+        "color": "green"
       }
-    }
+    ]
   },
   "shows": {
     "title": "Shows Actuales",
     "subtitle": "Un viaje cómico que no te puedes perder.",
     "mainShows": [
       {
-        "id": "+30k20",
-        "title": "+30K20",
-        "description": "En esta ocasión, luego de 2 fechas exitosas de Más 30 que 20, Gabriel nos trae una obra más desarrollada de este concepto: Un viaje hilarante y honesto a través de la crisis de los 30 sin todavía tenerla. Pensamientos, situaciones y formas de ver la vida cotidiana desde otra perspectiva. Sumérgete en este viaje cómico, compra tu entrada y prepárate para la terapia de risa que tanto necesitas.",
-        "date": "Sábado 6 de diciembre a las 7:30",
-        "venue": "Rancagua 395 | Gran refugio - Providencia",
+        "id": "idilico",
+        "title": "IDÍLICO",
+        "description": "Mi único show de comedia hasta el momento. Una mirada fresca y divertida a las expectativas vs realidad de la vida adulta.",
+        "date": "Jueves 6 de febrero a las 19:30",
+        "venue": "Villavicencio 232",
         "status": "Entradas disponibles",
         "statusColor": "text-green-600",
         "bgGradient": "from-gabriel-blue to-blue-600",
-        "ticketsUrl": "https://www.passline.com/eventos/mas-30-que-20-3ra-edicion",
-        "showImage": "/images/30k20-flyer.jpeg",
+        "ticketsUrl": "https://www.elestudiodearchi.cl/evento/idilico/",
+        "showImage": "/images/idilico-flyer.png",
         "features": [
-          "90 minutos de comedia",
-          "Material completamente nuevo",
-          "Experiencia interactiva"
+          "Show íntimo",
+          "Material exclusivo",
+          "Experiencia única"
         ]
       }
     ],

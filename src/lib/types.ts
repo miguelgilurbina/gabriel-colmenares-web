@@ -68,18 +68,15 @@ export interface SiteData {
     youtube?: string;
     spotify?: string;
     featuredContent?: {
-      short?: {
-        title: string;
-        description: string;
-        url: string;
-      };
-      podcast?: {
-        title: string;
-        description: string;
-        youtubeUrl: string;
-        spotifyUrl: string;
-      };
-    };
+      type: 'video' | 'podcast';
+      title: string;
+      description: string;
+      url?: string;
+      youtubeUrl?: string;
+      spotifyUrl?: string;
+      icon?: string;
+      color?: string;
+    }[];
   };
 
   // Próximos shows (placeholder para Passline)
@@ -185,16 +182,13 @@ export interface FooterData {
   youtube?: string;
   spotify?: string;
   featuredContent?: {
-    short?: {
-      title: string;
-      description: string;
-      url: string;
-    };
-    podcast?: {
-      title: string;
-      description: string;
-      youtubeUrl: string;
-      spotifyUrl: string;
-    };
-  };
+    type: 'video' | 'podcast';
+    title: string;
+    description: string;
+    url?: string;
+    youtubeUrl?: string;
+    spotifyUrl?: string;
+    icon?: string;
+    color?: string;
+  }[];
 }

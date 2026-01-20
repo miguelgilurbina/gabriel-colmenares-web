@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Instagram, Youtube, Headphones, Video, Play, ExternalLink, ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
+import { Instagram, Youtube, Headphones, Video, Play, ExternalLink, ArrowRight, ChevronDown, ChevronUp, Mic } from "lucide-react";
 import { ContactProps, ServicesProps } from "@/lib/types";
 import Services from "./Services";
 
@@ -69,87 +69,127 @@ export default function Contact({ data, eventInquiry, servicesData = [], classNa
           </motion.div>
 
           {/* Featured Content Section */}
-          {data.featuredContent && (
+          {data.featuredContent && data.featuredContent.length > 0 && (
             <motion.div variants={itemVariants} className="mb-12">
               <h3 className="text-2xl font-bold text-gabriel-dark text-center mb-6">
                 Contenido Destacado
               </h3>
-              <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-                {/* Short Video Card */}
-                {data.featuredContent.short && (
-                  <motion.div
-                    variants={itemVariants}
-                    className="group bg-white rounded-xl p-6 border border-gray-100 hover:border-red-300 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
-                  >
-                    <a
-                      href={data.featuredContent.short.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block"
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-red-500 transition-colors">
-                          <Video size={28} className="text-red-600 group-hover:text-white transition-colors" />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="text-lg font-semibold text-gabriel-dark mb-2 group-hover:text-red-600 transition-colors">
-                            {data.featuredContent.short.title}
-                          </h4>
-                          <p className="text-gabriel-gray text-sm mb-3">
-                            {data.featuredContent.short.description}
-                          </p>
-                          <div className="flex items-center text-red-600 font-medium text-sm group-hover:gap-2 transition-all">
-                            <Play size={16} />
-                            <span className="ml-1">Ver en YouTube</span>
-                            <ExternalLink size={14} className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                {data.featuredContent.map((content, index) => {
+                  // Determinar colores e iconos basados en el tipo y color
+                  const getIcon = () => {
+                    if (content.icon === 'Mic') return Mic;
+                    if (content.icon === 'Headphones') return Headphones;
+                    return Video;
+                  };
+
+                  const Icon = getIcon();
+
+                  const colorClasses = {
+                    red: {
+                      bg: 'bg-red-100',
+                      hover: 'hover:bg-red-500',
+                      text: 'text-red-600',
+                      border: 'hover:border-red-300',
+                      hoverText: 'group-hover:text-red-600'
+                    },
+                    blue: {
+                      bg: 'bg-blue-100',
+                      hover: 'hover:bg-blue-500',
+                      text: 'text-blue-600',
+                      border: 'hover:border-blue-300',
+                      hoverText: 'group-hover:text-blue-600'
+                    },
+                    green: {
+                      bg: 'bg-green-100',
+                      hover: 'hover:bg-green-600',
+                      text: 'text-green-700',
+                      border: 'hover:border-green-300',
+                      hoverText: 'group-hover:text-green-600'
+                    }
+                  };
+
+                  const colors = colorClasses[content.color as keyof typeof colorClasses] || colorClasses.red;
+
+                  if (content.type === 'video') {
+                    return (
+                      <motion.div
+                        key={index}
+                        variants={itemVariants}
+                        className={`group bg-white rounded-xl p-6 border border-gray-100 ${colors.border} transition-all duration-300 hover:shadow-lg hover:-translate-y-1`}
+                      >
+                        <a
+                          href={content.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block"
+                        >
+                          <div className="flex items-start gap-4">
+                            <div className={`w-14 h-14 ${colors.bg} rounded-xl flex items-center justify-center flex-shrink-0 ${colors.hover} transition-colors`}>
+                              <Icon size={28} className={`${colors.text} group-hover:text-white transition-colors`} />
+                            </div>
+                            <div className="flex-1">
+                              <h4 className={`text-lg font-semibold text-gabriel-dark mb-2 ${colors.hoverText} transition-colors`}>
+                                {content.title}
+                              </h4>
+                              <p className="text-gabriel-gray text-sm mb-3">
+                                {content.description}
+                              </p>
+                              <div className={`flex items-center ${colors.text} font-medium text-sm group-hover:gap-2 transition-all`}>
+                                <Play size={16} />
+                                <span className="ml-1">Ver en YouTube</span>
+                                <ExternalLink size={14} className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </motion.div>
+                    );
+                  } else if (content.type === 'podcast') {
+                    return (
+                      <motion.div
+                        key={index}
+                        variants={itemVariants}
+                        className={`group bg-white rounded-xl p-6 border border-gray-100 ${colors.border} transition-all duration-300 hover:shadow-lg hover:-translate-y-1`}
+                      >
+                        <div className="flex items-start gap-4 mb-4">
+                          <div className={`w-14 h-14 ${colors.bg} rounded-xl flex items-center justify-center flex-shrink-0 ${colors.hover} transition-colors`}>
+                            <Icon size={28} className={`${colors.text} group-hover:text-white transition-colors`} />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="text-lg font-semibold text-gabriel-dark mb-2">
+                              {content.title}
+                            </h4>
+                            <p className="text-gabriel-gray text-sm">
+                              {content.description}
+                            </p>
                           </div>
                         </div>
-                      </div>
-                    </a>
-                  </motion.div>
-                )}
-
-                {/* Podcast Card */}
-                {data.featuredContent.podcast && (
-                  <motion.div
-                    variants={itemVariants}
-                    className="group bg-white rounded-xl p-6 border border-gray-100 hover:border-green-300 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
-                  >
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-green-600 transition-colors">
-                        <Headphones size={28} className="text-green-700 group-hover:text-white transition-colors" />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="text-lg font-semibold text-gabriel-dark mb-2">
-                          {data.featuredContent.podcast.title}
-                        </h4>
-                        <p className="text-gabriel-gray text-sm">
-                          {data.featuredContent.podcast.description}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex flex-col sm:flex-row gap-2 mt-4">
-                      <a
-                        href={data.featuredContent.podcast.youtubeUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium"
-                      >
-                        <Youtube size={16} />
-                        YouTube
-                      </a>
-                      <a
-                        href={data.featuredContent.podcast.spotifyUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
-                      >
-                        <Headphones size={16} />
-                        Spotify
-                      </a>
-                    </div>
-                  </motion.div>
-                )}
+                        <div className="flex flex-col sm:flex-row gap-2 mt-4">
+                          <a
+                            href={content.youtubeUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium"
+                          >
+                            <Youtube size={16} />
+                            YouTube
+                          </a>
+                          <a
+                            href={content.spotifyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
+                          >
+                            <Headphones size={16} />
+                            Spotify
+                          </a>
+                        </div>
+                      </motion.div>
+                    );
+                  }
+                  return null;
+                })}
               </div>
             </motion.div>
           )}
